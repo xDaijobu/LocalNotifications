@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="LocalNotificationsSample.NotificationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:localnotifications="clr-namespace:LocalNotifications;assembly=LocalNotifications"
+    xmlns:localnotificationssample="clr-namespace:LocalNotificationsSample"
+    x:DataType="localnotificationssample:NotificationViewModel"
+    BackgroundColor="White">
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="BackgroundColor" Value="AliceBlue" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+        <Style TargetType="Picker">
+            <Setter Property="TextColor" Value="Black" />
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout Margin="10,30,10,10" Spacing="0">
+        <Label
+            Margin="5"
+            FontAttributes="Bold"
+            FontSize="30"
+            HorizontalTextAlignment="Center"
+            Text="Local Notifications" />
+
+        <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">
+            <Button
+                Grid.Row="0"
+                Grid.Column="0"
+                Command="{Binding ShowNotificationCommand}"
+                Text="Show Now" />
+            <Button
+                Grid.Row="0"
+                Grid.Column="1"
+                Command="{Binding ScheduleNotificationCommand}"
+                Text="Schedule" />
+
+            <Button
+                Grid.Row="1"
+                Grid.Column="0"
+                Command="{Binding CancelNotificationCommand}"
+                Text="Cancel" />
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Command="{Binding CancelAllNotificationsCommand}"
+                Text="Cancel All" />
+        </Grid>
+
+        <ListView
+            HasUnevenRows="True"
+            ItemsSource="{Binding PendingNotifications}"
+            SelectedItem="{Binding SelectedNotification}"
+            SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="localnotifications:NotificationRequest">
+                    <ViewCell>
+                        <Frame
+                            Margin="5"
+                            Padding="0"
+                            BackgroundColor="LightGreen"
+                            CornerRadius="5">
+                            <StackLayout Margin="5,2,5,2" Spacing="0">
+                                <Label Text="{Binding NotificationId, StringFormat='Id: {0:F0}'}" />
+                                <Label Text="{Binding Title, StringFormat='Title: {0:F0}'}" />
+                                <Label Text="{Binding Description, StringFormat='Description: {0:F0}'}" />
+                                <Label Text="{Binding Payload, StringFormat='Payload: {0:F0}'}" />
+                                <Label Text="{Binding NotifyTime, StringFormat='NotifyTime: {0:MMMM d, yyyy HH:mm:ss}'}" />
+                                <Label Text="{Binding Repeats, StringFormat='Repeat: {0:F0}'}" />
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
+
