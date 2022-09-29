@@ -1,4 +1,5 @@
 ﻿using System;
+using Android.App;
 using Android.Content;
 #if MONOANDROID
 using AndroidX.Core.App;
@@ -12,7 +13,7 @@ namespace LocalNotifications.Platform.Droid
         {
             try
             {
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.From(context);
+                var notificationManager = NotificationManager.FromContext(Application.Context);
                 string notificationDetailsJson = intent.GetStringExtra(NotificationConstans.NOTIFICATION_REQUEST);
                 bool repeat = intent.GetBooleanExtra(NotificationConstans.REPEAT, false);
 

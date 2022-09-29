@@ -146,8 +146,12 @@ namespace LocalNotifications.Platform.Droid
 
         public async Task<string> GetTokenAsync()
         {
+#if MONOANDROID
             var token = await FirebaseMessaging.Instance.GetToken();
             return token?.ToString();
+#else
+            return string.Empty;
+#endif
         }
 
         public void Show(int notificationId, string title, string description, string payload, AndroidOptions androidOptions = null, iOSOptions iOSOptions = null)
@@ -244,20 +248,31 @@ namespace LocalNotifications.Platform.Droid
 
         private void CancelNotification(int notificationId)
         {
+#if MONOANDROID
+            if (Build.VERSION.SdkInt < BuildVersionCodes.Kitkat)
+            {
+                return;
+            }
+#elif ANDROID
+            if (!OperatingSystem.IsAndroidVersionAtLeast(21))
+            {
+                return;
+            }
+#endif
             Intent intent = new Intent(CurrentContext, typeof(ScheduledNotificationReceiver));
             PendingIntent pendingIntent = PendingIntent.GetBroadcast(CurrentContext, notificationId, intent, PendingIntentFlags.UpdateCurrent);
             _alarmManager.Cancel(pendingIntent);
 
-            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.From(CurrentContext);
-            notificationManagerCompat.Cancel(notificationId);
+            var notificationManager = NotificationManager.FromContext(Application.Context);
+            notificationManager.Cancel(notificationId);
             //_notificationManager.Cancel(notificationId);
             RemoveNotificationFromCache(CurrentContext, notificationId);
         }
 
         private void CancelAllNotifications()
         {
-            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.From(CurrentContext);
-            notificationManagerCompat.CancelAll();
+            var notificationManager = NotificationManager.FromContext(Application.Context);
+            notificationManager.CancelAll();
 
             List<NotificationRequest> scheduledNotifications = LoadScheduledNotifications(CurrentContext);
             if (scheduledNotifications == null || scheduledNotifications.Count == 0)
@@ -276,8 +291,8 @@ namespace LocalNotifications.Platform.Droid
         public void ShowNotification(Context context, NotificationRequest notificationRequest)
         {
             Notification notification = CreateNotification(context, notificationRequest);
-            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.From(context);
-            notificationManagerCompat.Notify(notificationRequest.NotificationId, notification);
+            var notificationManager = NotificationManager.FromContext(Application.Context);
+            notificationManager.Notify(notificationRequest.NotificationId, notification);
 
             var args = new NotificationEventArgs()
             {
@@ -471,7 +486,7 @@ namespace LocalNotifications.Platform.Droid
             notificationIntent.PutExtra(NotificationConstans.NOTIFICATION_ID, notificationRequest.NotificationId);
             PendingIntent pendingIntent = PendingIntent.GetActivity(context, notificationRequest.NotificationId, notificationIntent, PendingIntentFlags.UpdateCurrent);
 
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, notificationRequest.Android.ChannelId)
+            var builder = new NotificationCompat.Builder(context, notificationRequest.Android.ChannelId)
                 .SetContentTitle(notificationRequest.Title)
                 .SetContentText(notificationRequest.Description)
                 .SetStyle(new NotificationCompat.BigTextStyle().BigText(notificationRequest.Description))

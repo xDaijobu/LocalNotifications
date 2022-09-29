@@ -49,4 +49,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0-rc.1.22426.10" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Source\LocalNotifications\LocalNotifications.csproj" />
+	</ItemGroup>
+
 </Project>
