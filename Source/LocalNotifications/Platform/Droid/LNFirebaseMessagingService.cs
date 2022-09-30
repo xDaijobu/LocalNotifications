@@ -1,4 +1,4 @@
-﻿#if MONOANDROID10_0
+﻿#if MONOANDROID
 using System;
 using System.Collections.Generic;
 using System.Linq;
