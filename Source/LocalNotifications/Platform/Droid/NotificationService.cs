@@ -7,13 +7,10 @@ using Android.Graphics;
 using Android.Icu.Util;
 using Android.Media;
 using Android.OS;
-
+using AndroidX.Core.App;
 #if MONOANDROID
 using Firebase.Messaging;
 using Android.Gms.Extensions;
-using AndroidX.Core.App;
-#else
-using AndroidX.Media.App;
 #endif
 
 namespace LocalNotifications.Platform.Droid

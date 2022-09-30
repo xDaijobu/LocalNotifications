@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -83,17 +83,16 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\drawable\icon.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\Source\LocalNotifications\LocalNotifications.csproj">
+      <Project>{aba387ec-7c40-455d-84e0-d2c61e3e7f07}</Project>
+      <Name>LocalNotifications</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LocalNotificationsSample\LocalNotificationsSample.csproj">
       <Project>{B25D49C9-B157-4285-8C94-1279EE43FC46}</Project>
       <Name>LocalNotificationsSample</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Source\LocalNotifications\LocalNotifications.csproj">
-      <Name>LocalNotifications</Name>
-    </ProjectReference>
   </ItemGroup>
- <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

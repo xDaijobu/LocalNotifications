@@ -132,12 +132,13 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Source\LocalNotifications\LocalNotifications.csproj">
+      <Project>{aba387ec-7c40-455d-84e0-d2c61e3e7f07}</Project>
+      <Name>LocalNotifications</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LocalNotificationsSample\LocalNotificationsSample.csproj">
       <Project>{B25D49C9-B157-4285-8C94-1279EE43FC46}</Project>
       <Name>LocalNotificationsSample</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Source\LocalNotifications\LocalNotifications.csproj">
-      <Name>LocalNotifications</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

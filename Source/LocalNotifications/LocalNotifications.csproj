@@ -1,7 +1,7 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;MonoAndroid10.0;Xamarin.iOS10;net6.0-android31.0;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;MonoAndroid10.0;Xamarin.iOS10;net6.0-android;net6.0-ios;</TargetFrameworks>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
@@ -41,7 +41,7 @@
 
   <!-- platform version number information -->
   <PropertyGroup>
-    <!--<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-ios'))">10.0</SupportedOSPlatformVersion>-->
+    <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-ios'))">10.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-android'))">21.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
@@ -64,6 +64,11 @@
     <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="117.6.0.4" />
     <PackageReference Include="Xamarin.GooglePlayServices.Tasks" Version="117.2.1.3" />
   </ItemGroup>
+	
+  <ItemGroup Condition="$(TargetFramework.StartsWith('Xamarin.iOS'))">
+    <Compile Include="**/Platform/iOS/**/*.cs" />
+    <PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging" Version="8.10.0" />
+  </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <Compile Include="**/Platform/Droid/**/*.cs" />
@@ -71,18 +76,11 @@
     <!--<PackageReference Include="Xamarin.GooglePlayServices.Location" Version="119.0.1.2" />-->
   </ItemGroup>
 
-  <ItemGroup Condition="$(TargetFramework.StartsWith('Xamarin.iOS'))">
-    <Compile Include="**/Platform/iOS/**/*.cs" />
-    <PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging" Version="8.10.0" />
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+	<Compile Include="**/Platform/iOS/**/*.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-android31.0'">
-    <!--<PackageReference Include="Xamarin.AndroidX.Media">
-      <Version>1.6.0.1</Version>
-    </PackageReference>-->
   </ItemGroup>
 </Project> 

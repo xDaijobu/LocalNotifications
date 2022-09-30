@@ -1,11 +1,26 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using AndroidX.Core.App;
 
 namespace LocalNotificationsSample2;
 
 [Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
 public class MainActivity : MauiAppCompatActivity
 {
+    protected override void OnCreate(Bundle savedInstanceState)
+    {
+        base.OnCreate(savedInstanceState);
+
+        LocalNotifications.Platform.Droid.NotificationService.NotificationTapped(Intent);
+    }
+
+    protected override void OnNewIntent(Intent intent)
+    {
+        base.OnNewIntent(intent);
+
+        LocalNotifications.Platform.Droid.NotificationService.NotificationTapped(intent);
+    }
 }
 

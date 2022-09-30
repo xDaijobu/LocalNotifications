@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
+#if XAMARINIOS
 using Firebase.CloudMessaging;
 using Firebase.Core;
+#endif
 using Foundation;
 using UIKit;
 using UserNotifications;
@@ -42,6 +44,7 @@ namespace LocalNotifications.Platform.iOS
         {
             if (isFirebase)
             {
+#if XAMARINIOS
                 if (App.DefaultInstance == null)
                 {
                     App.Configure();
@@ -49,7 +52,7 @@ namespace LocalNotifications.Platform.iOS
 
                 Messaging.SharedInstance.AutoInitEnabled = autoRegistration;
                 Messaging.SharedInstance.Delegate = FBMessagingDelegate;
-
+#endif
                 if (autoRegistration)
                     NotificationCenter.Current.RegisterForPushNotifications();
             }
@@ -154,7 +157,11 @@ namespace LocalNotifications.Platform.iOS
 
         public Task<string> GetTokenAsync()
         {
+#if XAMARINIOS
             return Task.FromResult(Messaging.SharedInstance.FcmToken);
+#elif IOS
+            return Task.FromResult(string.Empty);
+#endif
         }
 
         public static async Task RequestPermissions()
@@ -420,8 +427,7 @@ namespace LocalNotifications.Platform.iOS
             return scheduledNotifications;
         }
 
-        #region Others
-
+#region Others
         private static IDictionary<string, object> GetParameters(NSDictionary dictionary)
         {
             var parameters = new Dictionary<string, object>();
@@ -469,8 +475,6 @@ namespace LocalNotifications.Platform.iOS
                 iOS = iOSOptions,
             };
         }
-
-        #endregion
+#endregion
     }
 }
-
