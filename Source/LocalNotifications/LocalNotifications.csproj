@@ -45,6 +45,10 @@
     <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-android'))">21.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition="$(TargetFramework.Contains('-android')) Or $(TargetFramework.Contains('-ios'))">
+	<UseMaui>true</UseMaui>
+  </PropertyGroup>
+	
   <ItemGroup>
     <Compile Remove="**/Platform/**/*.cs" />
     <None Include="**/Platform/**/*.cs" />
@@ -74,5 +78,11 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-android31.0'">
+    <!--<PackageReference Include="Xamarin.AndroidX.Media">
+      <Version>1.6.0.1</Version>
+    </PackageReference>-->
   </ItemGroup>
 </Project> 

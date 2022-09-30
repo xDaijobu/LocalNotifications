@@ -1,7 +1,7 @@
 ﻿using System;
-#if MONOANDROID
+#if MONOANDROID || ANDROID
 using LocalNotifications.Platform.Droid;
-#elif XAMARIN_IOS
+#elif XAMARIN_IOS || __IOS__
 using LocalNotifications.Platform.iOS;
 #endif
 
@@ -13,7 +13,7 @@ namespace LocalNotifications
         {
             get
             {
-#if NETSTANDARD2_0 || ANDROID
+#if NETSTANDARD2_0
                 return null;
 #else
                 return new NotificationService();
