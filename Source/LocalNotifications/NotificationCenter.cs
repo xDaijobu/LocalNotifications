@@ -1,7 +1,7 @@
 ﻿using System;
 #if MONOANDROID || ANDROID
 using LocalNotifications.Platform.Droid;
-#elif XAMARINIOS1_0 || IOS
+#elif XAMARINIOS || IOS
 using LocalNotifications.Platform.iOS;
 #endif
 

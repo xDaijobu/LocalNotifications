@@ -7,20 +7,7 @@
     xmlns:localnotifications="clr-namespace:LocalNotifications;assembly=LocalNotifications"
     Title="NotificationPage"
     x:DataType="local:NotificationViewModel">
-    <ContentPage.Resources>
-        <Style TargetType="Button">
-            <Setter Property="CornerRadius" Value="5" />
-            <Setter Property="BackgroundColor" Value="AliceBlue" />
-        </Style>
-        <Style TargetType="Label">
-            <Setter Property="TextColor" Value="Black" />
-        </Style>
-        <Style TargetType="Picker">
-            <Setter Property="TextColor" Value="Black" />
-        </Style>
-    </ContentPage.Resources>
-
-    <StackLayout Margin="10,30,10,10" Spacing="0">
+    <StackLayout Margin="10,30,10,10" Spacing="5">
         <Label
             Margin="5"
             FontAttributes="Bold"
@@ -28,7 +15,11 @@
             HorizontalTextAlignment="Center"
             Text="Local Notifications" />
 
-        <Grid ColumnDefinitions="*, *" RowDefinitions="Auto, Auto">
+        <Grid
+            ColumnDefinitions="*, *"
+            ColumnSpacing="5"
+            RowDefinitions="Auto, Auto"
+            RowSpacing="5">
             <Button
                 Grid.Row="0"
                 Grid.Column="0"
@@ -60,11 +51,11 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="localnotifications:NotificationRequest">
                     <ViewCell>
-                        <Frame
-                            Margin="5"
-                            Padding="0"
+                        <Border
                             BackgroundColor="LightGreen"
-                            CornerRadius="5">
+                            Stroke="#LightGreen"
+                            StrokeShape="RoundRectangle 5"
+                            StrokeThickness="1">
                             <StackLayout Margin="5,2,5,2" Spacing="0">
                                 <Label Text="{Binding NotificationId, StringFormat='Id: {0:F0}'}" />
                                 <Label Text="{Binding Title, StringFormat='Title: {0:F0}'}" />
@@ -73,7 +64,7 @@
                                 <Label Text="{Binding NotifyTime, StringFormat='NotifyTime: {0:MMMM d, yyyy HH:mm:ss}'}" />
                                 <Label Text="{Binding Repeats, StringFormat='Repeat: {0:F0}'}" />
                             </StackLayout>
-                        </Frame>
+                        </Border>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
