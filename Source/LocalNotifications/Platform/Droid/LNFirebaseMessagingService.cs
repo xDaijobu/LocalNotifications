@@ -1,5 +1,4 @@
-﻿#if MONOANDROID
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.App;
@@ -79,6 +78,3 @@ namespace LocalNotifications.Platform.Droid
         }
     }
 }
-
-
-#endif

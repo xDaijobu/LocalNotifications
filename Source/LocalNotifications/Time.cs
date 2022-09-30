@@ -32,10 +32,6 @@ namespace LocalNotifications
 
             TimeSpan span = TimeSpan.Parse(time);
 
-            // TimeSpan To Time
-            if (span == null)
-                throw new NullReferenceException("span");
-
             Validation(span.Hours, span.Minutes, span.Seconds);
 
             Hour = span.Hours;

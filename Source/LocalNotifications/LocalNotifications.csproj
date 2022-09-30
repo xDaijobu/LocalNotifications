@@ -72,12 +72,16 @@
 
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <Compile Include="**/Platform/Droid/**/*.cs" />
-    <!--GoogleplayServices dkk blm ada di .Net 6-->
-    <!--<PackageReference Include="Xamarin.GooglePlayServices.Location" Version="119.0.1.2" />-->
+	<PackageReference Include="Xamarin.Firebase.Common" Version="120.1.2" />
+	<PackageReference Include="Xamarin.Firebase.Messaging" Version="123.0.8" />
+	<PackageReference Include="Xamarin.GooglePlayServices.Base" Version="118.1.0" />
+	<PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="118.1.0" />
+	<PackageReference Include="Xamarin.GooglePlayServices.Tasks" Version="118.0.2" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
 	<Compile Include="**/Platform/iOS/**/*.cs" />
+	<PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging" Version="8.10.0.1" />
   </ItemGroup>
 
   <ItemGroup>

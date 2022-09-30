@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-#if XAMARINIOS
 using Firebase.CloudMessaging;
 using Firebase.Core;
-#endif
 using Foundation;
 using UIKit;
 using UserNotifications;
@@ -44,7 +42,6 @@ namespace LocalNotifications.Platform.iOS
         {
             if (isFirebase)
             {
-#if XAMARINIOS
                 if (App.DefaultInstance == null)
                 {
                     App.Configure();
@@ -52,7 +49,7 @@ namespace LocalNotifications.Platform.iOS
 
                 Messaging.SharedInstance.AutoInitEnabled = autoRegistration;
                 Messaging.SharedInstance.Delegate = FBMessagingDelegate;
-#endif
+      
                 if (autoRegistration)
                     NotificationCenter.Current.RegisterForPushNotifications();
             }
@@ -136,7 +133,7 @@ namespace LocalNotifications.Platform.iOS
                 UNUserNotificationCenter.Current.RequestAuthorization(authOptions, async (granted, error) =>
                 {
                     Console.WriteLine(granted);
-                    await System.Threading.Tasks.Task.Delay(500);
+                    await Task.Delay(500);
                 });
             }
             else
@@ -157,11 +154,7 @@ namespace LocalNotifications.Platform.iOS
 
         public Task<string> GetTokenAsync()
         {
-#if XAMARINIOS
             return Task.FromResult(Messaging.SharedInstance.FcmToken);
-#elif IOS
-            return Task.FromResult(string.Empty);
-#endif
         }
 
         public static async Task RequestPermissions()

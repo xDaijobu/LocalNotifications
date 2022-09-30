@@ -8,10 +8,8 @@ using Android.Icu.Util;
 using Android.Media;
 using Android.OS;
 using AndroidX.Core.App;
-#if MONOANDROID
 using Firebase.Messaging;
 using Android.Gms.Extensions;
-#endif
 
 namespace LocalNotifications.Platform.Droid
 {
@@ -113,7 +111,6 @@ namespace LocalNotifications.Platform.Droid
             onNotificationReceived?.Invoke(args);
         }
 
-        // Todo Cris: OnTokenRefresh msih blm bisa buat net6 keatas
         private static FirebasePushNotificationTokenEventHandler onTokenRefresh;
         public event FirebasePushNotificationTokenEventHandler OnTokenRefresh
         {
@@ -144,12 +141,8 @@ namespace LocalNotifications.Platform.Droid
 
         public async Task<string> GetTokenAsync()
         {
-#if MONOANDROID
             var token = await FirebaseMessaging.Instance.GetToken();
             return token?.ToString();
-#else
-            return string.Empty;
-#endif
         }
 
         public void Show(int notificationId, string title, string description, string payload, AndroidOptions androidOptions = null, iOSOptions iOSOptions = null)
