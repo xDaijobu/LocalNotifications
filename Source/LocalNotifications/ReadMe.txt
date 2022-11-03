@@ -1,10 +1,12 @@
-LocalNotifications ReadMe
+# LocalNotifications
 
 ## Sample App
-LocalNotificationsSample [Xamarin/MAUI].
+* [Xamarin](https://github.com/xDaijobu/LocalNotifications/tree/main/Sample/Xamarin) 
+* [MAUI](https://github.com/xDaijobu/LocalNotifications/tree/main/Sample/Maui/LocalNotificationsSample2)
+
+<img width="307" alt="Screenshot 2022-11-03 at 14 07 09" src="https://user-images.githubusercontent.com/22674537/199664085-a547575f-1506-4249-bfaf-5417df8dcbad.png"><img width="373" alt="Screenshot 2022-11-03 at 14 10 19" src="https://user-images.githubusercontent.com/22674537/199664456-dd9e8b62-c9c3-42c2-a91b-51e716861f57.png">
 
 **Usage**
-
 ```csharp
 int notificationId = 1;
 public int NotificationId => notificationId++;
@@ -36,10 +38,8 @@ NotificationCenter.Current.Cancel(notificationId: 9999);
 // Cancel All Notification
 NotificationCenter.Current.CancelAll();
 
-
 // Get Pending Notification Requests
 var pendingNotifications = await NotificationCenter.Current.GetPendingNotificationRequests();
-```
 
 // Events
 NotificationCenter.Current.OnNotificationReceived += (e) =>
@@ -57,10 +57,11 @@ NotificationCenter.Current.OnTokenRefresh += (e) =>
 {
     Debug.WriteLine("Firebase Token: " + e.Token);
 };
-
+```
 ## Getting Started
 
 **Platform Specific Notes [MAUI]**
+
 To receive the Local Notification tap event. Include the following code in the CreateMauiApp() method of MauiProgram:
 ```csharp
 public static MauiApp CreateMauiApp()
@@ -104,10 +105,13 @@ public static MauiApp CreateMauiApp()
 
 
 **Platform Specific Notes [Xamarin]**
+
 *Android*
+
 The project should target Android framework 11.0+
 
 *Setup*
+
 To receive the Local Notification tap event. Incldue the following code in the OnNewIntent() method of MainActivity:
 
 ```csharp
@@ -130,7 +134,9 @@ public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompa
 ```
 
 *iOS*
+
 *Setup*
+
 You must get permission from the user to allow the app to show local notifications. Also, to receive the Local Notification tap event. Include the following code in the FinishedLaunching() method of AppDelegate:
 
 ```csharp
