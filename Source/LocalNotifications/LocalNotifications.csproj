@@ -12,10 +12,13 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Authors>Cristover Wurangian</Authors>
     <PackageTags>android, ios, xamarin, xamarin.forms, maui, local, notification, local.notification</PackageTags>
-    <RepositoryUrl></RepositoryUrl>
+    <PackageProjectUrl>https://github.com/xDaijobu/LocalNotifications</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/xDaijobu/LocalNotifications</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Description>A cross platform plugin for displaying local notifications.</Description>
+    <PackageReleaseNotes>Check: https://github.com/xDaijobu/LocalNotifications/releases </PackageReleaseNotes>	  
     <Copyright>Copyright © Cristover Wurangian</Copyright>
     <Version>2.0.4</Version>
     <AssemblyVersion>$(Version)</AssemblyVersion>
