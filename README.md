@@ -1,7 +1,10 @@
 # LocalNotifications
 
 ## Sample App
-LocalNotificationsSample [ Xamarin / MAUI ]
+LocalNotificationsSample
+
+* [Xamarin](https://github.com/xDaijobu/LocalNotifications/tree/main/Sample/Xamarin) 
+* [MAUI](https://github.com/xDaijobu/LocalNotifications/tree/main/Sample/Maui/LocalNotificationsSample2)
 
 **Usage**
 
@@ -59,6 +62,7 @@ NotificationCenter.Current.OnTokenRefresh += (e) =>
 ## Getting Started
 
 **Platform Specific Notes [MAUI]**
+
 To receive the Local Notification tap event. Include the following code in the CreateMauiApp() method of MauiProgram:
 ```csharp
 public static MauiApp CreateMauiApp()
@@ -102,10 +106,13 @@ public static MauiApp CreateMauiApp()
 
 
 **Platform Specific Notes [Xamarin]**
+
 *Android*
+
 The project should target Android framework 11.0+
 
 *Setup*
+
 To receive the Local Notification tap event. Incldue the following code in the OnNewIntent() method of MainActivity:
 
 ```csharp
