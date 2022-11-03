@@ -1,13 +1,13 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.44">
-
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;MonoAndroid10.0;Xamarin.iOS10;net6.0-android;net6.0-ios;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0-android;net6.0-ios;MonoAndroid10.0;Xamarin.iOS10</TargetFrameworks>
+    <SingleProject>true</SingleProject>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
     <NeutralLanguage>en</NeutralLanguage>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
-
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Authors>Cristover Wurangian</Authors>
@@ -17,7 +17,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Copyright>Copyright © Makmur Supra Nusantara</Copyright>
-    <Version>2.0.3</Version>
+    <Version>2.0.4</Version>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <AssemblyFileVersion>$(Version)</AssemblyFileVersion>
     <PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
@@ -28,16 +28,13 @@
     <PackOnBuild>true</PackOnBuild>
     <PackageId>LocalNotifications</PackageId> 
     <Configurations>Release;Debug</Configurations>
-    <LangVersion>10</LangVersion>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <LangVersion Condition=" $(TargetFramework.StartsWith('net6')) ">10.0</LangVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType></DebugType>
-    <NoWarn>1701;1702;1591</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <NoWarn>1701;1702;1591</NoWarn>
-  </PropertyGroup>
+  <ItemGroup>
+      <None Include="ReadMe.txt" pack="true" PackagePath="." />
+  </ItemGroup>
 
   <!-- platform version number information -->
   <PropertyGroup>
@@ -67,7 +64,7 @@
 	
   <ItemGroup Condition="$(TargetFramework.StartsWith('Xamarin.iOS'))">
     <Compile Include="**/Platform/iOS/**/*.cs" />
-    <PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging" Version="8.10.0" />
+    <PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging" Version="8.10.0.2" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
@@ -81,7 +78,7 @@
 
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
 	<Compile Include="**/Platform/iOS/**/*.cs" />
-	<PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging" Version="8.10.0.1" />
+	<PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging" Version="8.10.0.2" />
   </ItemGroup>
 
   <ItemGroup>
