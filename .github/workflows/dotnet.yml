@@ -30,10 +30,10 @@
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.1
                 
-      - name : restorePlugin.LocalNotification.sln
-        run: nuget restore Source/LocalNotifications/LocalNotifications.csproj
+      - name : restore LocalNotifications.sln
+        run: nuget restore LocalNotifications.sln
 
-      - name: build Plugin.LocalNotification.csproj
+      - name: build LocalNotifications.csproj
         run: msbuild Source/LocalNotifications/LocalNotifications.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
       
       - uses: actions/upload-artifact@v2.2.4
