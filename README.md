@@ -1,4 +1,4 @@
-# LocalNotifications
+# Local Notifications
 
 ## Sample App
 * [Xamarin](https://github.com/xDaijobu/LocalNotifications/tree/main/Sample/Xamarin) 
