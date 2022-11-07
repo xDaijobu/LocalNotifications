@@ -34,7 +34,7 @@
         run: nuget sources add -name "GitHub" -source "https://nuget.pkg.github.com/xDaijobu/index.json" -userName xDaijobu -password ${{ secrets.Daijobu_Registry }}
                 
       - name : restore LocalNotifications.sln
-        run: nuget restore LocalNotifications.sln
+        run: nuget restore Source/LocalNotifications.sln
 
       - name: build LocalNotifications.csproj
         run: msbuild Source/LocalNotifications/LocalNotifications.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
