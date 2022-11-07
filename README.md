@@ -31,7 +31,8 @@ NotificationCenter.Current.Schedule(notificationId: NotificationId,
                                     description: "Hello World",
                                     dateTime: DateTime.Now.AddSeconds(value),
                                     payload: "",
-                                    androidOptions: GetAndroidOptions());
+                                    androidOptions: new AndroidOptions(),
+				    iOSOptions: new iOSOptions());
 
 // Cancel Local Notification
 NotificationCenter.Current.Cancel(notificationId: 9999);
