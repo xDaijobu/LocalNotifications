@@ -62,6 +62,9 @@ NotificationCenter.Current.OnTokenRefresh += (e) =>
 ```
 ## Getting Started
 
+**Firebase**
+> coming soon
+
 **Platform Specific Notes [MAUI]**
 
 To receive the Local Notification tap event. Include the following code in the CreateMauiApp() method of MauiProgram:
