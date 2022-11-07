@@ -1,5 +1,11 @@
 # Local Notifications
 
+## Nuget
+```
+https://www.nuget.org/packages/LocalNotifications ( -Version 2.0.4 )
+```
+
+
 ## Sample App
 * [Xamarin](https://github.com/xDaijobu/LocalNotifications/tree/main/Sample/Xamarin) 
 * [MAUI](https://github.com/xDaijobu/LocalNotifications/tree/main/Sample/Maui/LocalNotificationsSample2)
@@ -17,7 +23,7 @@ NotificationCenter.Current.Show(notificationId: NotificationId,
                                 description: "Hello World",
                                 payload: "",
                                 androidOptions: new AndroidOptions(),
-				iOSOptions = new iOSOptions());
+								iOSOptions = new iOSOptions());
 
 // Show Hourly / Daily / Weekly Local Notification
 NotificationCenter.Current.ShowHourly(int notificationId, string title, string description, Time time, string payload, AndroidOptions androidOptions = null, iOSOptions iOSOptions = null);
@@ -32,7 +38,7 @@ NotificationCenter.Current.Schedule(notificationId: NotificationId,
                                     dateTime: DateTime.Now.AddSeconds(value),
                                     payload: "",
                                     androidOptions: new AndroidOptions(),
-				    iOSOptions: new iOSOptions());
+				    				iOSOptions: new iOSOptions());
 
 // Cancel Local Notification
 NotificationCenter.Current.Cancel(notificationId: 9999);
@@ -61,10 +67,6 @@ NotificationCenter.Current.OnTokenRefresh += (e) =>
 };
 ```
 ## Getting Started
-
-**Firebase**
-> coming soon
-
 **Platform Specific Notes [MAUI]**
 
 To receive the Local Notification tap event. Include the following code in the CreateMauiApp() method of MauiProgram:
@@ -162,6 +164,33 @@ public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsAppli
 }
 ```
 
+## Firebase
+Create a Firebase project and enable Firebase Cloud Messaging
+- https://xmonkeys360.com/2019/12/08/xamarin-forms-fcm-setup-configuration-part-i/
+
+*Android*
+
+add this permission:
+> <uses-permission android:name="android.permission.INTERNET" />
+- Add google-services.json to Android project. Make sure build action is GoogleServicesJson 
+
+
+ *iOS*
+ 
+ * Add GoogleService-Info.plist to iOS project. Make sure build action is BundleResource
+ * On Info.plist enable remote notification background mode -> Enable Background Modes. Check the Enable Background Modes option and then check the Remote Notifications.
+ * Add FirebaseAppDelegateProxyEnabled in the app’s Info.plist file and set it to No
+ * Entitlements.plist. Choose the Push Notifications option from the left pane and check the Enable Push Notifications check box.
+
+Call LocalNotifications.Platform.iOS.NotificationService.Initialize on AppDelegate FinishedLaunching
+```csharp
+	LocalNotifications.Platform.iOS.NotificationService.Initialize(options: options,
+									isFirebase: true,
+									autoRegistration: true);
+```
+
+ Note: You need to configure the required certificates and provisioning profile for your iOS project additional to these steps.
+
 ## Project Structure
 
 | Namespace | Description |
@@ -175,5 +204,3 @@ public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsAppli
 For more information please visit:
 
 - Github repository: https://github.com/xDaijobu/LocalNotifications
-
-
