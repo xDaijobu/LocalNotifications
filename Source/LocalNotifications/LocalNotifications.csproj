@@ -86,5 +86,6 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Xamarin.Build.Download" Version="0.11.1" />
   </ItemGroup>
 </Project> 
