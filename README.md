@@ -16,7 +16,8 @@ NotificationCenter.Current.Show(notificationId: NotificationId,
                                 title: "ShowNow",
                                 description: "Hello World",
                                 payload: "",
-                                androidOptions: GetAndroidOptions());
+                                androidOptions: new AndroidOptions(),
+				iOSOptions = new iOSOptions());
 
 // Show Hourly / Daily / Weekly Local Notification
 NotificationCenter.Current.ShowHourly(int notificationId, string title, string description, Time time, string payload, AndroidOptions androidOptions = null, iOSOptions iOSOptions = null);
