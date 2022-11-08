@@ -210,14 +210,16 @@ namespace LocalNotifications.Platform.iOS
         {
             string notificationRequestJson = notificationRequest.ToJson();
 
-            NSMutableDictionary userDictionary = new NSMutableDictionary();
-            userDictionary.Add(NOTIFICATION_ID, new NSNumber(notificationRequest.NotificationId));
-            userDictionary.Add(TITLE, new NSString(notificationRequest.Title));
-            userDictionary.Add(PRESENT_ALERT, new NSNumber(notificationRequest.iOS.PresentAlert));
-            userDictionary.Add(PLAY_SOUND, new NSNumber(notificationRequest.iOS.PlaySound));
-            userDictionary.Add(SHOW_BADGE, new NSNumber(notificationRequest.iOS.ShowBadge));
-            userDictionary.Add(PAYLOAD, new NSString(notificationRequest.Payload));
-            userDictionary.Add(NOTIFICATION_REQUEST, new NSString(notificationRequestJson));
+            NSMutableDictionary userDictionary = new NSMutableDictionary
+            {
+                { NOTIFICATION_ID, new NSNumber(notificationRequest.NotificationId) },
+                { TITLE, new NSString(notificationRequest.Title) },
+                { PRESENT_ALERT, new NSNumber(notificationRequest.iOS.PresentAlert) },
+                { PLAY_SOUND, new NSNumber(notificationRequest.iOS.PlaySound) },
+                { SHOW_BADGE, new NSNumber(notificationRequest.iOS.ShowBadge) },
+                { PAYLOAD, new NSString(notificationRequest.Payload) },
+                { NOTIFICATION_REQUEST, new NSString(notificationRequestJson) }
+            };
 
             return userDictionary;
         }
