@@ -159,7 +159,7 @@ namespace LocalNotifications.Platform.iOS
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error in RequestPermissionsAsync : " + ex.Message);
+                Console.WriteLine("Error in RequestPermissionsAsync: " + ex.Message);
                 return false;
             }
         }
@@ -220,7 +220,7 @@ namespace LocalNotifications.Platform.iOS
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error in Show : " + ex.Message);
+                Console.WriteLine("Error in Show: " + ex.Message);
             }
             finally
             {
@@ -269,7 +269,7 @@ namespace LocalNotifications.Platform.iOS
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error in Schedule : " + ex.Message);
+                Console.WriteLine("Error in Schedule: " + ex.Message);
             }
             finally
             {
@@ -344,7 +344,7 @@ namespace LocalNotifications.Platform.iOS
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error in Cancel : " + ex.Message);
+                Console.WriteLine("Error in Cancel: " + ex.Message);
             }
         }
 
@@ -357,7 +357,7 @@ namespace LocalNotifications.Platform.iOS
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error in CancelAll : " + ex.Message);
+                Console.WriteLine("Error in CancelAll: " + ex.Message);
             }
 
         }
