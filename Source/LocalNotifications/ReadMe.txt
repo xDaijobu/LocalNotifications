@@ -96,6 +96,25 @@ public static MauiApp CreateMauiApp()
 			fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 			fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 		})
+		.UseLocalNotifications(isFirebase: true, autoRegistration: true);
+
+		return builder.Build();
+	}
+```
+
+or 
+
+```csharp
+public static MauiApp CreateMauiApp()
+{
+	var builder = MauiApp.CreateBuilder();
+	builder
+		.UseMauiApp<App>()
+		.ConfigureFonts(fonts =>
+		{
+			fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+			fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+		})
       // https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/app-lifecycle
       .ConfigureLifecycleEvents(events =>
       {
