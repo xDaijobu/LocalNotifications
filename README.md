@@ -19,7 +19,7 @@ https://www.nuget.org/packages/LocalNotifications ( -Version 2.0.4 )
 
 <img width="307" alt="Screenshot 2022-11-03 at 14 07 09" src="https://user-images.githubusercontent.com/22674537/199664085-a547575f-1506-4249-bfaf-5417df8dcbad.png"><img width="373" alt="Screenshot 2022-11-03 at 14 10 19" src="https://user-images.githubusercontent.com/22674537/199664456-dd9e8b62-c9c3-42c2-a91b-51e716861f57.png">
 
-**Usage**
+## Usage
 ```csharp
 int notificationId = 1;
 public int NotificationId => notificationId++;
