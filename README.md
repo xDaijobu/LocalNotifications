@@ -1,11 +1,11 @@
 # Local Notifications
 
-1. [Nuget](https://github.com/xDaijobu/LocalNotifications#nuget)
-2. [Sample App](https://github.com/xDaijobu/LocalNotifications#sample-app)
-3. [Usage](https://github.com/xDaijobu/LocalNotifications#usage)
-4. [Getting Started](https://github.com/xDaijobu/LocalNotifications#getting-started)
-5. [Firebase](https://github.com/xDaijobu/LocalNotifications#firebase)
-6. [Project Structure](https://github.com/xDaijobu/LocalNotifications#project-structure)
+1. [Nuget](#nuget)
+2. [Sample App](#sample-app)
+3. [Usage](#usage)
+4. [Getting Started](#getting-started)
+5. [Firebase](#firebase)
+6. [Project Structure](#project-structure)
 
 ## Nuget
 ```
