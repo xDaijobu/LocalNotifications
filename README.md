@@ -19,7 +19,13 @@ https://www.nuget.org/packages/LocalNotifications ( -Version 2.0.4 )
 * [Xamarin](https://github.com/xDaijobu/LocalNotifications/tree/main/Sample/Xamarin) 
 * [MAUI](https://github.com/xDaijobu/LocalNotifications/tree/main/Sample/Maui/LocalNotificationsSample2)
 
-<img width="307" alt="Screenshot 2022-11-03 at 14 07 09" src="https://user-images.githubusercontent.com/22674537/199664085-a547575f-1506-4249-bfaf-5417df8dcbad.png"><img width="373" alt="Screenshot 2022-11-03 at 14 10 19" src="https://user-images.githubusercontent.com/22674537/199664456-dd9e8b62-c9c3-42c2-a91b-51e716861f57.png">
+| Platform      | Screenshoots |
+| :---        |    :----:   |
+| Android      | <img width="300" alt="Screenshot 2022-11-03 at 14 07 09" src="https://user-images.githubusercontent.com/22674537/199664085-a547575f-1506-4249-bfaf-5417df8dcbad.png"><img width="300" alt="Screenshot 2022-11-03 at 14 10 19" src="https://user-images.githubusercontent.com/22674537/199664456-dd9e8b62-c9c3-42c2-a91b-51e716861f57.png">       |
+| iOS   | <img width="300" alt="Screenshot 2022-11-08 at 14 13 04" src="https://user-images.githubusercontent.com/22674537/200498405-03ebc105-2728-4bb4-bccf-573266f12ed7.png"><img width="300" alt="Screenshot 2022-11-08 at 14 13 47" src="https://user-images.githubusercontent.com/22674537/200498521-88d915ac-bc30-4e6b-b90a-7126248f73a8.png"> |
+
+
+
 
 ## Usage
 ```csharp
