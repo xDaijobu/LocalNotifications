@@ -62,14 +62,8 @@ namespace LocalNotifications.Platform.iOS
         private static NotificationTappedEventHandler onNotificationTapped;
         public event NotificationTappedEventHandler OnNotificationTapped
         {
-            add
-            {
-                onNotificationTapped += value;
-            }
-            remove
-            {
-                onNotificationTapped -= value;
-            }
+            add => onNotificationTapped += value;
+            remove => onNotificationTapped -= value;
         }
 
         public static void OnPlatformNotificationTapped(string payload, int? notificationId)
@@ -86,14 +80,8 @@ namespace LocalNotifications.Platform.iOS
         private static NotificationReceivedEventHandler onNotificationReceived;
         public event NotificationReceivedEventHandler OnNotificationReceived
         {
-            add
-            {
-                onNotificationReceived += value;
-            }
-            remove
-            {
-                onNotificationReceived -= value;
-            }
+            add => onNotificationReceived += value;
+            remove => onNotificationReceived -= value;
         }
 
         public static void OnPlatformNotificationReceived(string payload, int? notificationId)
@@ -110,14 +98,8 @@ namespace LocalNotifications.Platform.iOS
         private static FirebasePushNotificationTokenEventHandler onTokenRefresh;
         public event FirebasePushNotificationTokenEventHandler OnTokenRefresh
         {
-            add
-            {
-                onTokenRefresh += value;
-            }
-            remove
-            {
-                onTokenRefresh -= value;
-            }
+            add => onTokenRefresh += value;
+            remove => onTokenRefresh -= value;
         }
 
         public void RegisterForPushNotifications()
@@ -153,14 +135,10 @@ namespace LocalNotifications.Platform.iOS
         }
 
         public Task<string> GetTokenAsync()
-        {
-            return Task.FromResult(Messaging.SharedInstance.FcmToken);
-        }
+            => Task.FromResult(Messaging.SharedInstance.FcmToken);
 
-        public static async Task RequestPermissions()
-        {
-            await RequestPermissionsAsync().ConfigureAwait(false);
-        }
+        public static Task RequestPermissions()
+            => RequestPermissionsAsync();
 
         public static async Task<bool> RequestPermissionsAsync()
         {
@@ -199,8 +177,7 @@ namespace LocalNotifications.Platform.iOS
             if (notificationRequest.iOS.BadgeNumber.HasValue)
                 content.Badge = new NSNumber(iOSOptions.BadgeNumber.Value);
 
-            if (content.Sound == null)
-                content.Sound = UNNotificationSound.Default;
+            content.Sound ??= UNNotificationSound.Default;
 
             content.UserInfo = BuildUserDictionary(notificationRequest);
             return content;
@@ -229,11 +206,10 @@ namespace LocalNotifications.Platform.iOS
             UNCalendarNotificationTrigger trigger = null;
             try
             {
-                if (!(await RequestPermissionsAsync().ConfigureAwait(false)))
+                if (!await RequestPermissionsAsync().ConfigureAwait(false))
                     return;
 
-                if (iOSOptions == null)
-                    iOSOptions = new iOSOptions();
+                iOSOptions ??= new iOSOptions();
 
                 NotificationRequest notificationRequest = GetNotificationRequest(notificationId, title, description, payload, iOSOptions);
                 UNMutableNotificationContent content = BuildStandardNotificationContent(notificationRequest);
@@ -254,7 +230,6 @@ namespace LocalNotifications.Platform.iOS
 
         public async void ShowHourly(int notificationId, string title, string description, Time time, string payload, AndroidOptions androidOptions = null, iOSOptions iOSOptions = null)
         {
-            //alternatif lainnya pakai  UNTimeIntervalNotificationTrigger ( kekurangannya ngga bisa nentuin kapan notifikasiny akan mulai )
             await Repeat(notificationId, title, description, Day.None, time, NotificationRepeat.Hourly, payload, iOSOptions).ConfigureAwait(false);
         }
 
@@ -273,7 +248,7 @@ namespace LocalNotifications.Platform.iOS
             UNCalendarNotificationTrigger trigger = null;
             try
             {
-                if (!(await RequestPermissionsAsync().ConfigureAwait(false)))
+                if (!await RequestPermissionsAsync().ConfigureAwait(false))
                     return;
 
                 if (iOSOptions == null)
@@ -307,8 +282,7 @@ namespace LocalNotifications.Platform.iOS
             UNCalendarNotificationTrigger trigger = null;
             try
             {
-                if (iOSOptions == null)
-                    iOSOptions = new iOSOptions();
+                iOSOptions ??= new iOSOptions();
 
                 NotificationRequest notificationRequest = new NotificationRequest()
                 {
@@ -329,12 +303,12 @@ namespace LocalNotifications.Platform.iOS
                 NSDateComponents notifyTime = GetNsDateComponents(notificationRequest.WeekDay, notificationRequest.Time);
 
                 trigger = UNCalendarNotificationTrigger.CreateTrigger(notifyTime, notificationRequest.Repeats);
-                Console.WriteLine("NextTriggerDate : " + trigger.NextTriggerDate);
+                //Console.WriteLine("NextTriggerDate : " + trigger.NextTriggerDate);
                 await AddNotificationRequestAsync(notificationId.ToString(), content, trigger);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error in Repeat : " + ex.Message);
+                Console.WriteLine("Error in Repeat[iOS]: " + ex.Message);
             }
             finally
             {

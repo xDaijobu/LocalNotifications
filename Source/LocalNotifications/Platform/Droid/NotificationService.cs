@@ -56,14 +56,8 @@ namespace LocalNotifications.Platform.Droid
         private static NotificationTappedEventHandler onNotificationTapped;
         public event NotificationTappedEventHandler OnNotificationTapped
         {
-            add
-            {
-                onNotificationTapped += value;
-            }
-            remove
-            {
-                onNotificationTapped -= value;
-            }
+            add => onNotificationTapped += value;
+            remove => onNotificationTapped -= value;
         }
 
         public static void NotificationTapped(Intent intent)
@@ -90,14 +84,8 @@ namespace LocalNotifications.Platform.Droid
         private static NotificationReceivedEventHandler onNotificationReceived;
         public event NotificationReceivedEventHandler OnNotificationReceived
         {
-            add
-            {
-                onNotificationReceived += value;
-            }
-            remove
-            {
-                onNotificationReceived -= value;
-            }
+            add => onNotificationReceived += value;
+            remove => onNotificationReceived -= value;
         }
 
         public static void NotificationReceived(int notificationId, string payload)
@@ -114,14 +102,8 @@ namespace LocalNotifications.Platform.Droid
         private static FirebasePushNotificationTokenEventHandler onTokenRefresh;
         public event FirebasePushNotificationTokenEventHandler OnTokenRefresh
         {
-            add
-            {
-                onTokenRefresh += value;
-            }
-            remove
-            {
-                onTokenRefresh -= value;
-            }
+            add => onTokenRefresh += value;
+            remove => onTokenRefresh -= value;
         }
 
         public static void TokenRefresh(string newToken)
@@ -163,24 +145,17 @@ namespace LocalNotifications.Platform.Droid
         }
 
         public void ShowHourly(int notificationId, string title, string description, Time time, string payload, AndroidOptions androidOptions = null, iOSOptions iOSOptions = null)
-        {
-            Repeat(notificationId, title, description, Day.None, time, NotificationRepeat.Hourly, payload, androidOptions);
-        }
+            => Repeat(notificationId, title, description, Day.None, time, NotificationRepeat.Hourly, payload, androidOptions);
 
         public void ShowDaily(int notificationId, string title, string description, Time time, string payload, AndroidOptions androidOptions = null, iOSOptions iOSOptions = null)
-        {
-            Repeat(notificationId, title, description, Day.None, time, NotificationRepeat.Daily, payload, androidOptions);
-        }
+            => Repeat(notificationId, title, description, Day.None, time, NotificationRepeat.Daily, payload, androidOptions);
 
         public void ShowWeekly(int notificationId, string title, string description, Day weekDay, Time time, string payload, AndroidOptions androidOptions = null, iOSOptions iOSOptions = null)
-        {
-            Repeat(notificationId, title, description, weekDay, time, NotificationRepeat.Weekly, payload, androidOptions);
-        }
+            => Repeat(notificationId, title, description, weekDay, time, NotificationRepeat.Weekly, payload, androidOptions);
 
         private void Repeat(int notificationId, string title, string description, Day weekDay, Time time, NotificationRepeat repeatInterval, string payload, AndroidOptions androidOptions = null, iOSOptions iOSOptions = null)
         {
-            if (androidOptions == null)
-                androidOptions = new AndroidOptions();
+            androidOptions ??= new AndroidOptions();
 
             NotificationRequest notificationRequest = new NotificationRequest()
             {
@@ -202,8 +177,7 @@ namespace LocalNotifications.Platform.Droid
         public void Schedule(int notificationId, string title, string description, DateTime dateTime, string payload, AndroidOptions androidOptions = null, iOSOptions iOSOptions = null)
         {
             //NotityTime  a.k.a dateTime / scheduletime
-            if (androidOptions == null)
-                androidOptions = new AndroidOptions();
+            androidOptions ??= new AndroidOptions();
 
             //To Epoch timestamp
             var notifyTimeSinceEpoch = dateTime.GetMilliSecondsSinceEpoch();
@@ -223,32 +197,22 @@ namespace LocalNotifications.Platform.Droid
         }
 
         public void Cancel(int notificationId)
-        {
-            CancelNotification(notificationId);
-        }
+            => CancelNotification(notificationId);
 
         public void CancelAll()
-        {
-            CancelAllNotifications();
-        }
+            => CancelAllNotifications();
 
         public List<NotificationRequest> GetPendingNotificationRequests()
-        {
-            return LoadScheduledNotifications(CurrentContext);
-        }
+            => LoadScheduledNotifications(CurrentContext);
 
         private void CancelNotification(int notificationId)
         {
 #if MONOANDROID
             if (Build.VERSION.SdkInt < BuildVersionCodes.Kitkat)
-            {
                 return;
-            }
 #elif ANDROID
             if (!OperatingSystem.IsAndroidVersionAtLeast(21))
-            {
                 return;
-            }
 #endif
             Intent intent = new Intent(CurrentContext, typeof(ScheduledNotificationReceiver));
             PendingIntent pendingIntent = PendingIntent.GetBroadcast(CurrentContext, notificationId, intent, PendingIntentFlags.UpdateCurrent);
@@ -444,9 +408,7 @@ namespace LocalNotifications.Platform.Droid
         }
 
         private ISharedPreferences GetSharedPreferences(Context context)
-        {
-            return context.GetSharedPreferences(NotificationConstans.SCHEDULED_NOTIFICATIONS, FileCreationMode.Private);
-        }
+            => context.GetSharedPreferences(NotificationConstans.SCHEDULED_NOTIFICATIONS, FileCreationMode.Private);
 
         public void RemoveNotificationFromCache(Context context, int notificationId)
         {
