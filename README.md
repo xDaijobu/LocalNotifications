@@ -134,7 +134,7 @@ The project should target Android framework 11.0+
 
 *Setup*
 
-To receive the Local Notification tap event. Incldue the following code in the OnNewIntent() method of MainActivity:
+To receive the Local Notification tap event. Include the following code in the OnNewIntent() method of MainActivity:
 
 ```csharp
 public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
@@ -194,7 +194,9 @@ Create a Firebase project and enable Firebase Cloud Messaging
 *Android*
 
 add this permission:
-> <uses-permission android:name="android.permission.INTERNET" />
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
 - Add google-services.json to Android project. Make sure build action is GoogleServicesJson 
 
 
