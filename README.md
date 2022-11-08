@@ -4,8 +4,10 @@
 2. [Sample App](#sample-app)
 3. [Usage](#usage)
 4. [Getting Started](#getting-started)
-5. [Firebase](#firebase)
-6. [Project Structure](#project-structure)
+5. [Limitations](#limitations)
+6. [Firebase](#firebase)
+7. [Project Structure](#project-structure)
+
 
 ## Nuget
 ```
@@ -170,6 +172,14 @@ public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsAppli
         }
 }
 ```
+
+## Limitations
+iOS pending notifications limit 
+> There is a limit imposed by iOS where it will only keep 64 notifications that will fire the soonest.
+
+Scheduled Android notifications
+> Some Android OEMs have their own customised Android OS that can prevent applications from running in the background. 
+
 
 ## Firebase
 Create a Firebase project and enable Firebase Cloud Messaging
