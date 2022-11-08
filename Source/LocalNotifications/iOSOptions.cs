@@ -8,6 +8,9 @@ namespace LocalNotifications
         public bool PlaySound { get; set; } = true;
         public string Sound { get; set; } = string.Empty;
         public bool ShowBadge { get; set; } = true;
+        /// <summary>
+        /// iOS doesn't sum the badge numbers you send to the app
+        /// </summary>
         public int? BadgeNumber { get; set; } = null;
         public bool HideForegroundalert { get; set; }
     }
