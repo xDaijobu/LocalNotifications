@@ -1,6 +1,6 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.44">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;MonoAndroid10.0;Xamarin.iOS10;net6.0-android;net6.0-ios;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;MonoAndroid10.0;Xamarin.iOS10;net6.0;net6.0-android;net6.0-ios;</TargetFrameworks>
     <SingleProject>true</SingleProject>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
