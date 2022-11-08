@@ -60,18 +60,20 @@ namespace LocalNotificationsSample
                                             title: "ShowNow",
                                             description: "Hello World",
                                             payload: "",
-                                            androidOptions: GetAndroidOptions());
+                                            androidOptions: GetAndroidOptions(),
+                                            iOSOptions: GetiOSOptions());
         });
 
         public Command ScheduleNotificationCommand => new Command(async () =>
         {
-            int value = 30;
+            int value = 5;
             NotificationCenter.Current.Schedule(notificationId: NotificationId,
                                                 title: $"Schedule: {DateTime.Now.AddSeconds(value)}",
                                                 description: "Hello World",
                                                 dateTime: DateTime.Now.AddSeconds(value),
                                                 payload: "",
-                                                androidOptions: GetAndroidOptions());
+                                                androidOptions: GetAndroidOptions(),
+                                                iOSOptions: GetiOSOptions());
 
             GetNotifications();
             await CurrentPage.DisplayAlert("Schedule Notification", $"{value} dtk dr skrng notifikasinya akan muncul", "Ok").ConfigureAwait(false);
@@ -108,6 +110,15 @@ namespace LocalNotificationsSample
                 AllowWhileIdle = true,
                 Priority = NotificationPriority.Default,
                 ChannelId = NotificationConstans.DEFAULT_CHANNEL_ID,
+            };
+        }
+
+        private iOSOptions GetiOSOptions()
+        {
+            return new iOSOptions()
+            {
+                ShowBadge = true,
+                BadgeNumber = notificationId,
             };
         }
 
