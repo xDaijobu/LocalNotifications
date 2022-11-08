@@ -197,7 +197,7 @@ namespace LocalNotifications.Platform.iOS
                 content.Sound = UNNotificationSound.GetSound(iOSOptions.Sound);
 
             if (notificationRequest.iOS.BadgeNumber.HasValue)
-                content.Badge = new NSNumber(iOSOptions.BadgeNumber.HasValue);
+                content.Badge = new NSNumber(iOSOptions.BadgeNumber.Value);
 
             if (content.Sound == null)
                 content.Sound = UNNotificationSound.Default;

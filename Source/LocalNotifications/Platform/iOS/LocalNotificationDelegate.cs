@@ -18,20 +18,22 @@ namespace LocalNotifications.Platform.iOS
                 if (!response.IsDefaultAction)
                     return;
 
-                //UIApplication.SharedApplication.InvokeOnMainThread(() =>
-                //{
-                //    //TODO : Badge ny masih blm ke update 
-                //    nint appBadges = UIApplication.SharedApplication.ApplicationIconBadgeNumber;
-
-                //    System.Diagnostics.Debug.WriteLine("Current Badge: " + appBadges);
-                //    //var x = Convert.ToInt32(response.Notification.Request.Content.Badge.ToString(), CultureInfo.CurrentCulture);
-                //    UIApplication.SharedApplication.ApplicationIconBadgeNumber = appBadges;
-                //});
+                if (response.Notification.Request.Content.Badge != null)
+                {
+                    UIApplication.SharedApplication.InvokeOnMainThread(() =>
+                    {
+                        nint appBadges = UIApplication.SharedApplication.ApplicationIconBadgeNumber - response.Notification.Request.Content.Badge.Int32Value;
+                        UIApplication.SharedApplication.ApplicationIconBadgeNumber = appBadges;
+                    });
+                }
 
                 NSDictionary dictionary = response.Notification.Request.Content.UserInfo;
                 iOSNotification iOSNotification = GetiOSNotification(dictionary);
-                NotificationService.OnPlatformNotificationTapped(iOSNotification.Payload, iOSNotification.NotificationId);
 
+                if (iOSNotification != null)
+                    NotificationService.OnPlatformNotificationTapped(iOSNotification.Payload, iOSNotification.NotificationId);
+
+                completionHandler?.Invoke();
             }
             catch (Exception ex)
             {
@@ -69,11 +71,8 @@ namespace LocalNotifications.Platform.iOS
                     if (iOSNotification.IsFromFirebase)
                         presentationOptions = UNNotificationPresentationOptions.Alert;
                 }
-
-                if (completionHandler is null)
-                    return;
                     
-                completionHandler(presentationOptions);
+                completionHandler?.Invoke(presentationOptions);
             }
             catch (Exception ex)
             {
