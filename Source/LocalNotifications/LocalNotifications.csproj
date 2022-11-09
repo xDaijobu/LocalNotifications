@@ -33,7 +33,6 @@
     <Configurations>Release;Debug</Configurations>
     <NoWarn>1701;1702;1591</NoWarn>
     <LangVersion>10.0</LangVersion>
-    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
