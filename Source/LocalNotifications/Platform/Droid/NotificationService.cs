@@ -15,6 +15,18 @@ namespace LocalNotifications.Platform.Droid
 {
     public class NotificationService : INotificationService
     {
+        /*
+         * Read Me
+         * https://developer.android.com/reference/android/app/PendingIntent#FLAG_IMMUTABLE
+         * Up until Build.VERSION_CODES.R, PendingIntents are assumed to be mutable by default, unless FLAG_IMMUTABLE is set. 
+         * Starting with Build.VERSION_CODES.S, it will be required to explicitly specify the mutability of PendingIntents on creation with either (@link #FLAG_IMMUTABLE} or FLAG_MUTABLE. 
+         * It is strongly recommended to use FLAG_IMMUTABLE when creating a PendingIntent. 
+         * FLAG_MUTABLE should only be used when some functionality relies on modifying the underlying intent, e.g. any PendingIntent that needs to be used with inline reply or bubbles.
+         */
+        private static PendingIntentFlags pendingIntentFlags = (Build.VERSION.SdkInt >= BuildVersionCodes.S)
+                ? PendingIntentFlags.UpdateCurrent | PendingIntentFlags.Mutable
+                : PendingIntentFlags.UpdateCurrent;
+
         private NotificationManager _notificationManager;
         private AlarmManager _alarmManager => Application.Context.GetSystemService(Context.AlarmService) as AlarmManager;
 
@@ -215,7 +227,7 @@ namespace LocalNotifications.Platform.Droid
                 return;
 #endif
             Intent intent = new Intent(CurrentContext, typeof(ScheduledNotificationReceiver));
-            PendingIntent pendingIntent = PendingIntent.GetBroadcast(CurrentContext, notificationId, intent, PendingIntentFlags.UpdateCurrent);
+            PendingIntent pendingIntent = PendingIntent.GetBroadcast(CurrentContext, notificationId, intent, pendingIntentFlags);
             _alarmManager.Cancel(pendingIntent);
 
             var notificationManager = NotificationManager.FromContext(Application.Context);
@@ -236,7 +248,7 @@ namespace LocalNotifications.Platform.Droid
             Intent intent = new Intent(CurrentContext, typeof(ScheduledNotificationReceiver));
             foreach (NotificationRequest notification in scheduledNotifications)
             {
-                PendingIntent pendingIntent = PendingIntent.GetBroadcast(CurrentContext, notification.NotificationId, intent, PendingIntentFlags.UpdateCurrent);
+                PendingIntent pendingIntent = PendingIntent.GetBroadcast(CurrentContext, notification.NotificationId, intent, pendingIntentFlags);
                 _alarmManager.Cancel(pendingIntent);
             }
 
@@ -262,7 +274,7 @@ namespace LocalNotifications.Platform.Droid
             string notificationRequestJson = notificationRequest.ToJson();
             Intent notificationIntent = new Intent(Application.Context, typeof(ScheduledNotificationReceiver));
             notificationIntent.PutExtra(NotificationConstans.NOTIFICATION_REQUEST, notificationRequestJson);
-            PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, notificationRequest.NotificationId, notificationIntent, PendingIntentFlags.UpdateCurrent);
+            PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, notificationRequest.NotificationId, notificationIntent, pendingIntentFlags);
 
             if (notificationRequest.Android.AllowWhileIdle)
                 _alarmManager.SetExactAndAllowWhileIdle(AlarmType.RtcWakeup, notificationRequest.NotifyTimeSinceEpoch, pendingIntent);
@@ -281,7 +293,7 @@ namespace LocalNotifications.Platform.Droid
                 Intent notificationIntent = new Intent(Application.Context, typeof(ScheduledNotificationReceiver));
                 notificationIntent.PutExtra(NotificationConstans.NOTIFICATION_REQUEST, notificationRequestJson);
                 notificationIntent.PutExtra(NotificationConstans.REPEAT, true);
-                PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, notificationRequest.NotificationId, notificationIntent, PendingIntentFlags.UpdateCurrent);
+                PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, notificationRequest.NotificationId, notificationIntent, pendingIntentFlags);
 
                 long repeatInterval = 0;
 
@@ -437,7 +449,7 @@ namespace LocalNotifications.Platform.Droid
             notificationIntent.SetFlags(ActivityFlags.SingleTop);
             notificationIntent.PutExtra(NotificationConstans.PAYLOAD, notificationRequest.Payload);
             notificationIntent.PutExtra(NotificationConstans.NOTIFICATION_ID, notificationRequest.NotificationId);
-            PendingIntent pendingIntent = PendingIntent.GetActivity(context, notificationRequest.NotificationId, notificationIntent, PendingIntentFlags.UpdateCurrent);
+            PendingIntent pendingIntent = PendingIntent.GetActivity(context, notificationRequest.NotificationId, notificationIntent, pendingIntentFlags);
 
             var builder = new NotificationCompat.Builder(context, notificationRequest.Android.ChannelId)
                 .SetContentTitle(notificationRequest.Title)

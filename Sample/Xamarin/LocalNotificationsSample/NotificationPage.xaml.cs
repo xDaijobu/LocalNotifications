@@ -110,6 +110,7 @@ namespace LocalNotificationsSample
                 AllowWhileIdle = true,
                 Priority = NotificationPriority.Default,
                 ChannelId = NotificationConstans.DEFAULT_CHANNEL_ID,
+                ShowBadge = true,
             };
         }
 
