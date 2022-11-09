@@ -13,7 +13,7 @@ namespace LocalNotifications
         {
             get
             {
-#if NETSTANDARD2_0
+#if NETSTANDARD2_0 || NET6_0_OR_GREATER
                 return null;
 #else
                 return new NotificationService();

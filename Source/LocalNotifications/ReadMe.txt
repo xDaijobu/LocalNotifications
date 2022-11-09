@@ -4,8 +4,10 @@
 2. [Sample App](#sample-app)
 3. [Usage](#usage)
 4. [Getting Started](#getting-started)
-5. [Firebase](#firebase)
-6. [Project Structure](#project-structure)
+5. [Limitations](#limitations)
+6. [Firebase](#firebase)
+7. [Project Structure](#project-structure)
+
 
 ## Nuget
 ```
@@ -17,7 +19,13 @@ https://www.nuget.org/packages/LocalNotifications ( -Version 2.0.4 )
 * [Xamarin](https://github.com/xDaijobu/LocalNotifications/tree/main/Sample/Xamarin) 
 * [MAUI](https://github.com/xDaijobu/LocalNotifications/tree/main/Sample/Maui/LocalNotificationsSample2)
 
-<img width="307" alt="Screenshot 2022-11-03 at 14 07 09" src="https://user-images.githubusercontent.com/22674537/199664085-a547575f-1506-4249-bfaf-5417df8dcbad.png"><img width="373" alt="Screenshot 2022-11-03 at 14 10 19" src="https://user-images.githubusercontent.com/22674537/199664456-dd9e8b62-c9c3-42c2-a91b-51e716861f57.png">
+| Platform      | Screenshoots |
+| :---        |    :----:   |
+| Android      | <img width="300" alt="Screenshot 2022-11-03 at 14 07 09" src="https://user-images.githubusercontent.com/22674537/199664085-a547575f-1506-4249-bfaf-5417df8dcbad.png"><img width="300" alt="Screenshot 2022-11-03 at 14 10 19" src="https://user-images.githubusercontent.com/22674537/199664456-dd9e8b62-c9c3-42c2-a91b-51e716861f57.png">       |
+| iOS   | <img width="300" alt="Screenshot 2022-11-08 at 14 13 04" src="https://user-images.githubusercontent.com/22674537/200498405-03ebc105-2728-4bb4-bccf-573266f12ed7.png"><img width="300" alt="Screenshot 2022-11-08 at 14 13 47" src="https://user-images.githubusercontent.com/22674537/200498521-88d915ac-bc30-4e6b-b90a-7126248f73a8.png"> |
+
+
+
 
 ## Usage
 ```csharp
@@ -88,6 +96,25 @@ public static MauiApp CreateMauiApp()
 			fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 			fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 		})
+		.UseLocalNotifications(isFirebase: true, autoRegistration: true);
+
+		return builder.Build();
+	}
+```
+
+or 
+
+```csharp
+public static MauiApp CreateMauiApp()
+{
+	var builder = MauiApp.CreateBuilder();
+	builder
+		.UseMauiApp<App>()
+		.ConfigureFonts(fonts =>
+		{
+			fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+			fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+		})
       // https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/app-lifecycle
       .ConfigureLifecycleEvents(events =>
       {
@@ -126,7 +153,7 @@ The project should target Android framework 11.0+
 
 *Setup*
 
-To receive the Local Notification tap event. Incldue the following code in the OnNewIntent() method of MainActivity:
+To receive the Local Notification tap event. Include the following code in the OnNewIntent() method of MainActivity:
 
 ```csharp
 public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
@@ -171,6 +198,14 @@ public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsAppli
 }
 ```
 
+## Limitations
+iOS pending notifications limit 
+> There is a limit imposed by iOS where it will only keep 64 notifications that will fire the soonest.
+
+Scheduled Android notifications
+> Some Android OEMs have their own customised Android OS that can prevent applications from running in the background. 
+
+
 ## Firebase
 Create a Firebase project and enable Firebase Cloud Messaging
 - https://xmonkeys360.com/2019/12/08/xamarin-forms-fcm-setup-configuration-part-i/
@@ -178,7 +213,9 @@ Create a Firebase project and enable Firebase Cloud Messaging
 *Android*
 
 add this permission:
-> <uses-permission android:name="android.permission.INTERNET" />
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
 - Add google-services.json to Android project. Make sure build action is GoogleServicesJson 
 
 
