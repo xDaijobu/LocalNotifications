@@ -1,7 +1,7 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.44">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;MonoAndroid10.0;Xamarin.iOS10;net6.0;net6.0-android;net6.0-ios;</TargetFrameworks>
-    <SingleProject>true</SingleProject>
+    <TargetFrameworks>netstandard2.0;MonoAndroid12.0;Xamarin.iOS10;net6.0;net6.0-android;net6.0-ios;</TargetFrameworks>
+    <SingleProject>true</SingleProject> 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -20,7 +20,7 @@
     <Description>A cross platform plugin for displaying local notifications.</Description>
     <PackageReleaseNotes>Check: https://github.com/xDaijobu/LocalNotifications/releases </PackageReleaseNotes>	  
     <Copyright>Copyright © Cristover Wurangian</Copyright>
-    <Version>2.0.4</Version>
+    <Version>2.0.5</Version>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <AssemblyFileVersion>$(Version)</AssemblyFileVersion>
     <PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
