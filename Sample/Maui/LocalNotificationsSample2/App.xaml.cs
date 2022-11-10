@@ -9,7 +9,6 @@ public partial class App : Application
 		InitializeComponent();
 
 		MainPage = new AppShell();
-
         NotificationCenter.Current.OnNotificationTapped += OnNotificationTapped;
         NotificationCenter.Current.OnNotificationReceived += OnNotificationReceived;
         NotificationCenter.Current.OnTokenRefresh += (s, e) =>
