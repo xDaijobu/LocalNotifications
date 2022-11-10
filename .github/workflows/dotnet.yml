@@ -21,11 +21,11 @@
           distribution: 'microsoft'
           java-version: '11'
 
-#       - name: Install MAUI Workloads
-#         run: |
-#           dotnet workload install android --ignore-failed-sources
-#           dotnet workload install ios --ignore-failed-sources
-#           dotnet workload install maui --ignore-failed-sources
+      - name: Install MAUI Workloads
+        run: |
+          dotnet workload install android --ignore-failed-sources
+          dotnet workload install ios --ignore-failed-sources
+          dotnet workload install maui --ignore-failed-sources
 
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.1
