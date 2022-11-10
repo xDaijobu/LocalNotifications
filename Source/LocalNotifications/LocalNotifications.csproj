@@ -1,6 +1,6 @@
 <Project Sdk="MSBuild.Sdk.Extras/3.0.44">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;MonoAndroid12.0;Xamarin.iOS10;net6.0;net6.0-android;net6.0-ios;</TargetFrameworks> <!---->
+    <TargetFrameworks>netstandard2.0;MonoAndroid12.0;Xamarin.iOS10;net6.0-android;net6.0-ios;</TargetFrameworks> <!---->
     <SingleProject>true</SingleProject> 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
@@ -45,7 +45,7 @@
     <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-android'))">21.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('net')) == true AND $(TargetFramework.EndsWith('standard2.0')) != true"> <!-- net6, net6 android net6 ios dkk -->
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net')) == true AND $(TargetFramework.EndsWith('standard2.0')) != true"> <!-- net6 android net6 ios -->
 	<UseMaui>true</UseMaui>
   </PropertyGroup>
 	
@@ -53,18 +53,9 @@
     <Compile Remove="**/Platform/**/*.cs" />
     <None Include="**/Platform/**/*.cs" />
   </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFramework.StartsWith('net')) == true AND $(TargetFramework.EndsWith('.0')) == true AND $(TargetFramework.Contains('-')) != true AND $(TargetFramework.EndsWith('standard2.0')) != true"> <!-- e.g net6.0 or net7.0 -->
-    <Compile Include="**/*.net.cs" />
-  </ItemGroup>
-
-  <!--<ItemGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
-    <Compile Include="**/*.cs" />
-  </ItemGroup>-->
  
   <ItemGroup Condition="$(TargetFramework.StartsWith('MonoAndroid'))">
     <Compile Include="**/Platform/Droid/**/*.cs" />
-
     <PackageReference Include="Xamarin.AndroidX.Core" Version="1.6.0.3" />
     <PackageReference Include="Xamarin.Firebase.Common" Version="120.0.0.3" />
     <PackageReference Include="Xamarin.Firebase.Messaging" Version="122.0.0.3" />
