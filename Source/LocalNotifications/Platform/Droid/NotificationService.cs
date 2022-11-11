@@ -23,7 +23,7 @@ namespace LocalNotifications.Platform.Droid
          * It is strongly recommended to use FLAG_IMMUTABLE when creating a PendingIntent. 
          * FLAG_MUTABLE should only be used when some functionality relies on modifying the underlying intent, e.g. any PendingIntent that needs to be used with inline reply or bubbles.
          */
-        private static PendingIntentFlags pendingIntentFlags = (Build.VERSION.SdkInt >= BuildVersionCodes.S)
+        private static PendingIntentFlags pendingIntentFlags = ((int)Build.VERSION.SdkInt >= 31)
                 ? PendingIntentFlags.UpdateCurrent | PendingIntentFlags.Mutable
                 : PendingIntentFlags.UpdateCurrent;
 
