@@ -68,7 +68,7 @@
   <ItemGroup Condition="$(TargetFramework.StartsWith('Xamarin.iOS'))">
     <Compile Include="**/Platform/iOS/**/*.cs" />
     <PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging" Version="8.10.0.2" />
-    <PackageReference Include="Xamarin.Build.Download" Version="0.11.3" PrivateAssets="All" />
+    <!--<PackageReference Include="Xamarin.Build.Download" Version="0.11.3" PrivateAssets="All" />-->
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
