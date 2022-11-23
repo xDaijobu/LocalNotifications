@@ -1,17 +1,13 @@
-# Local Notifications
-
-1. [Nuget](#nuget)
-2. [Sample App](#sample-app)
-3. [Usage](#usage)
-4. [Getting Started](#getting-started)
-5. [Limitations](#limitations)
-6. [Firebase](#firebase)
-7. [Project Structure](#project-structure)
-
-
-## Get it from NuGet:
+# Local Notifications for MAUI and Xamarin.Forms
+Get it from NuGet:
 [![Nuget](https://img.shields.io/nuget/v/LocalNotifications)](https://www.nuget.org/packages/LocalNotifications/)
 
+1. [Sample App](#sample-app)
+2. [Usage](#usage)
+3. [Getting Started](#getting-started)
+4. [Limitations](#limitations)
+5. [Firebase](#firebase)
+6. [Project Structure](#project-structure)
 
 ## Sample App
 * [Xamarin](https://github.com/xDaijobu/LocalNotifications/tree/main/Sample/Xamarin) 
