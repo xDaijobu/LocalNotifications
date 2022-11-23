@@ -9,9 +9,9 @@
 7. [Project Structure](#project-structure)
 
 
-## Nuget
+## Get it from NuGet:
 ```
-https://www.nuget.org/packages/LocalNotifications ( -Version 2.0.4 )
+[![Nuget](https://img.shields.io/nuget/v/LocalNotifications)](https://www.nuget.org/packages/LocalNotifications/)
 ```
 
 
