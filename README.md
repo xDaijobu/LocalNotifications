@@ -10,9 +10,7 @@
 
 
 ## Get it from NuGet:
-```
 [![Nuget](https://img.shields.io/nuget/v/LocalNotifications)](https://www.nuget.org/packages/LocalNotifications/)
-```
 
 
 ## Sample App
