@@ -15,8 +15,8 @@ updates:
     schedule:
       interval: "daily"
       
-  - package-ecosystem: "nuget" # See documentation for possible values
-    directory: "/Sample/Xamarin/LocalNotificationsSample" # Location of package manifests
-    schedule:
-      interval: "daily"
+#   - package-ecosystem: "nuget" # See documentation for possible values
+#     directory: "/Sample/Xamarin/LocalNotificationsSample" # Location of package manifests
+#     schedule:
+#       interval: "daily"
 
