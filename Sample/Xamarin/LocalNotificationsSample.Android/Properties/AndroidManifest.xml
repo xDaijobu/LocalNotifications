@@ -3,4 +3,6 @@
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="31" />
 	<application android:label="LocalNotificationsSample.Android" android:theme="@style/MainTheme"></application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<!--https://stackoverflow.com/questions/71031091/android-12-using-schedule-exact-alarm-permission-to-get-show-data-at-specific-t-->
+	<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
 </manifest>
