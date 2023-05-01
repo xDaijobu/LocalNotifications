@@ -20,7 +20,7 @@
     <Description>A cross platform plugin for displaying local notifications.</Description>
     <PackageReleaseNotes>Check: https://github.com/xDaijobu/LocalNotifications/releases </PackageReleaseNotes>	  
     <Copyright>Copyright © Cristover Wurangian</Copyright>
-    <Version>2.0.5.1</Version>
+    <Version>2.0.5.2</Version>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <AssemblyFileVersion>$(Version)</AssemblyFileVersion>
     <PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
