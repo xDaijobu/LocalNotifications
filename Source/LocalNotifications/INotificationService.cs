@@ -40,5 +40,14 @@ namespace LocalNotifications
         void Schedule(int notificationId, string title, string description, DateTime dateTime, string payload, AndroidOptions androidOptions = null, iOSOptions iOSOptions = null);
 
         Task<string> GetTokenAsync();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="permission"></param>
+        /// <returns></returns>
+        Task<bool> RequestNotificationPermission(NotificationPermission permission = null);
+
+        Task<bool> IsNotificationsEnabled();
     }
 }

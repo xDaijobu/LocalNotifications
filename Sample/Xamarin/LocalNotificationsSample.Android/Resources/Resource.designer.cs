@@ -14,7 +14,7 @@ namespace LocalNotificationsSample.Droid
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.1.0.5")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "13.2.2.120")]
 	public partial class Resource
 	{
 		
@@ -56,6 +56,10 @@ namespace LocalNotificationsSample.Droid
 			global::LocalNotifications.Resource.Attribute.ttcIndex = global::LocalNotificationsSample.Droid.Resource.Attribute.ttcIndex;
 			global::LocalNotifications.Resource.Color.androidx_core_ripple_material_light = global::LocalNotificationsSample.Droid.Resource.Color.androidx_core_ripple_material_light;
 			global::LocalNotifications.Resource.Color.androidx_core_secondary_text_default_material_light = global::LocalNotificationsSample.Droid.Resource.Color.androidx_core_secondary_text_default_material_light;
+			global::LocalNotifications.Resource.Color.browser_actions_bg_grey = global::LocalNotificationsSample.Droid.Resource.Color.browser_actions_bg_grey;
+			global::LocalNotifications.Resource.Color.browser_actions_divider_color = global::LocalNotificationsSample.Droid.Resource.Color.browser_actions_divider_color;
+			global::LocalNotifications.Resource.Color.browser_actions_text_color = global::LocalNotificationsSample.Droid.Resource.Color.browser_actions_text_color;
+			global::LocalNotifications.Resource.Color.browser_actions_title_color = global::LocalNotificationsSample.Droid.Resource.Color.browser_actions_title_color;
 			global::LocalNotifications.Resource.Color.common_google_signin_btn_text_dark = global::LocalNotificationsSample.Droid.Resource.Color.common_google_signin_btn_text_dark;
 			global::LocalNotifications.Resource.Color.common_google_signin_btn_text_dark_default = global::LocalNotificationsSample.Droid.Resource.Color.common_google_signin_btn_text_dark_default;
 			global::LocalNotifications.Resource.Color.common_google_signin_btn_text_dark_disabled = global::LocalNotificationsSample.Droid.Resource.Color.common_google_signin_btn_text_dark_disabled;
@@ -69,6 +73,8 @@ namespace LocalNotificationsSample.Droid
 			global::LocalNotifications.Resource.Color.common_google_signin_btn_tint = global::LocalNotificationsSample.Droid.Resource.Color.common_google_signin_btn_tint;
 			global::LocalNotifications.Resource.Color.notification_action_color_filter = global::LocalNotificationsSample.Droid.Resource.Color.notification_action_color_filter;
 			global::LocalNotifications.Resource.Color.notification_icon_bg_color = global::LocalNotificationsSample.Droid.Resource.Color.notification_icon_bg_color;
+			global::LocalNotifications.Resource.Dimension.browser_actions_context_menu_max_width = global::LocalNotificationsSample.Droid.Resource.Dimension.browser_actions_context_menu_max_width;
+			global::LocalNotifications.Resource.Dimension.browser_actions_context_menu_min_padding = global::LocalNotificationsSample.Droid.Resource.Dimension.browser_actions_context_menu_min_padding;
 			global::LocalNotifications.Resource.Dimension.compat_button_inset_horizontal_material = global::LocalNotificationsSample.Droid.Resource.Dimension.compat_button_inset_horizontal_material;
 			global::LocalNotifications.Resource.Dimension.compat_button_inset_vertical_material = global::LocalNotificationsSample.Droid.Resource.Dimension.compat_button_inset_vertical_material;
 			global::LocalNotifications.Resource.Dimension.compat_button_padding_horizontal_material = global::LocalNotificationsSample.Droid.Resource.Dimension.compat_button_padding_horizontal_material;
@@ -167,6 +173,11 @@ namespace LocalNotificationsSample.Droid
 			global::LocalNotifications.Resource.Id.async = global::LocalNotificationsSample.Droid.Resource.Id.async;
 			global::LocalNotifications.Resource.Id.auto = global::LocalNotificationsSample.Droid.Resource.Id.auto;
 			global::LocalNotifications.Resource.Id.blocking = global::LocalNotificationsSample.Droid.Resource.Id.blocking;
+			global::LocalNotifications.Resource.Id.browser_actions_header_text = global::LocalNotificationsSample.Droid.Resource.Id.browser_actions_header_text;
+			global::LocalNotifications.Resource.Id.browser_actions_menu_items = global::LocalNotificationsSample.Droid.Resource.Id.browser_actions_menu_items;
+			global::LocalNotifications.Resource.Id.browser_actions_menu_item_icon = global::LocalNotificationsSample.Droid.Resource.Id.browser_actions_menu_item_icon;
+			global::LocalNotifications.Resource.Id.browser_actions_menu_item_text = global::LocalNotificationsSample.Droid.Resource.Id.browser_actions_menu_item_text;
+			global::LocalNotifications.Resource.Id.browser_actions_menu_view = global::LocalNotificationsSample.Droid.Resource.Id.browser_actions_menu_view;
 			global::LocalNotifications.Resource.Id.chronometer = global::LocalNotificationsSample.Droid.Resource.Id.chronometer;
 			global::LocalNotifications.Resource.Id.dark = global::LocalNotificationsSample.Droid.Resource.Id.dark;
 			global::LocalNotifications.Resource.Id.dialog_button = global::LocalNotificationsSample.Droid.Resource.Id.dialog_button;
@@ -213,6 +224,8 @@ namespace LocalNotificationsSample.Droid
 			global::LocalNotifications.Resource.Id.wide = global::LocalNotificationsSample.Droid.Resource.Id.wide;
 			global::LocalNotifications.Resource.Integer.google_play_services_version = global::LocalNotificationsSample.Droid.Resource.Integer.google_play_services_version;
 			global::LocalNotifications.Resource.Integer.status_bar_notification_info_maxnum = global::LocalNotificationsSample.Droid.Resource.Integer.status_bar_notification_info_maxnum;
+			global::LocalNotifications.Resource.Layout.browser_actions_context_menu_page = global::LocalNotificationsSample.Droid.Resource.Layout.browser_actions_context_menu_page;
+			global::LocalNotifications.Resource.Layout.browser_actions_context_menu_row = global::LocalNotificationsSample.Droid.Resource.Layout.browser_actions_context_menu_row;
 			global::LocalNotifications.Resource.Layout.custom_dialog = global::LocalNotificationsSample.Droid.Resource.Layout.custom_dialog;
 			global::LocalNotifications.Resource.Layout.notification_action = global::LocalNotificationsSample.Droid.Resource.Layout.notification_action;
 			global::LocalNotifications.Resource.Layout.notification_action_tombstone = global::LocalNotificationsSample.Droid.Resource.Layout.notification_action_tombstone;
@@ -238,6 +251,10 @@ namespace LocalNotificationsSample.Droid
 			global::LocalNotifications.Resource.String.common_open_on_phone = global::LocalNotificationsSample.Droid.Resource.String.common_open_on_phone;
 			global::LocalNotifications.Resource.String.common_signin_button_text = global::LocalNotificationsSample.Droid.Resource.String.common_signin_button_text;
 			global::LocalNotifications.Resource.String.common_signin_button_text_long = global::LocalNotificationsSample.Droid.Resource.String.common_signin_button_text_long;
+			global::LocalNotifications.Resource.String.copy_toast_msg = global::LocalNotificationsSample.Droid.Resource.String.copy_toast_msg;
+			global::LocalNotifications.Resource.String.fallback_menu_item_copy_link = global::LocalNotificationsSample.Droid.Resource.String.fallback_menu_item_copy_link;
+			global::LocalNotifications.Resource.String.fallback_menu_item_open_in_browser = global::LocalNotificationsSample.Droid.Resource.String.fallback_menu_item_open_in_browser;
+			global::LocalNotifications.Resource.String.fallback_menu_item_share_link = global::LocalNotificationsSample.Droid.Resource.String.fallback_menu_item_share_link;
 			global::LocalNotifications.Resource.String.fcm_fallback_notification_channel_label = global::LocalNotificationsSample.Droid.Resource.String.fcm_fallback_notification_channel_label;
 			global::LocalNotifications.Resource.String.status_bar_notification_info_overflow = global::LocalNotificationsSample.Droid.Resource.String.status_bar_notification_info_overflow;
 			global::LocalNotifications.Resource.Style.TextAppearance_Compat_Notification = global::LocalNotificationsSample.Droid.Resource.Style.TextAppearance_Compat_Notification;
@@ -304,6 +321,8 @@ namespace LocalNotificationsSample.Droid
 			global::LocalNotifications.Resource.Styleable.SignInButton_buttonSize = global::LocalNotificationsSample.Droid.Resource.Styleable.SignInButton_buttonSize;
 			global::LocalNotifications.Resource.Styleable.SignInButton_colorScheme = global::LocalNotificationsSample.Droid.Resource.Styleable.SignInButton_colorScheme;
 			global::LocalNotifications.Resource.Styleable.SignInButton_scopeUris = global::LocalNotificationsSample.Droid.Resource.Styleable.SignInButton_scopeUris;
+			global::LocalNotifications.Resource.Xml.image_share_filepaths = global::LocalNotificationsSample.Droid.Resource.Xml.image_share_filepaths;
+			global::LocalNotifications.Resource.Xml.xamarin_essentials_fileprovider_file_paths = global::LocalNotificationsSample.Droid.Resource.Xml.xamarin_essentials_fileprovider_file_paths;
 			global::Xamarin.Essentials.Resource.Attribute.alpha = global::LocalNotificationsSample.Droid.Resource.Attribute.alpha;
 			global::Xamarin.Essentials.Resource.Attribute.font = global::LocalNotificationsSample.Droid.Resource.Attribute.font;
 			global::Xamarin.Essentials.Resource.Attribute.fontProviderAuthority = global::LocalNotificationsSample.Droid.Resource.Attribute.fontProviderAuthority;

@@ -16,6 +16,15 @@ namespace LocalNotificationsSample
             {
                 System.Diagnostics.Debug.WriteLine("Current Token : " + e.Token);
             };
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                if (await NotificationCenter.Current.IsNotificationsEnabled() == false)
+                {
+                    await NotificationCenter.Current.RequestNotificationPermission();
+                }
+            });
+            
         }
 
         protected async void OnNotificationTapped(NotificationEventArgs e)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
+using CoreLocation;
 using Firebase.CloudMessaging;
 using Firebase.Core;
 using Foundation;
@@ -396,7 +397,47 @@ namespace LocalNotifications.Platform.iOS
             return scheduledNotifications;
         }
 
-#region Others
+        public async Task<bool> IsNotificationsEnabled()
+        {
+            var settings = await UNUserNotificationCenter.Current.GetNotificationSettingsAsync().ConfigureAwait(false);
+            return settings.AlertSetting == UNNotificationSetting.Enabled;
+        }
+
+        public async Task<bool> RequestNotificationPermission(NotificationPermission? permission = null)
+        {
+            try
+            {
+                permission ??= new NotificationPermission();
+
+                if (!permission.AskPermission)
+                {
+                    return false;
+                }
+
+                var allowed = await IsNotificationsEnabled();
+                if (allowed)
+                {
+                    return true;
+                }
+
+                // Ask the user for permission to show notifications on iOS 10.0+
+                var (alertsAllowed, error) = await UNUserNotificationCenter.Current.RequestAuthorizationAsync(UNAuthorizationOptions.Sound).ConfigureAwait(false);
+
+                if (error != null)
+                {
+                    Console.WriteLine(error);
+                }
+
+                return alertsAllowed;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
+        #region Others
         private static IDictionary<string, object> GetParameters(NSDictionary dictionary)
         {
             var parameters = new Dictionary<string, object>();

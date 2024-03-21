@@ -10,6 +10,7 @@ using Android.OS;
 using AndroidX.Core.App;
 using Firebase.Messaging;
 using Android.Gms.Extensions;
+using Xamarin.Essentials;
 
 namespace LocalNotifications.Platform.Droid
 {
@@ -654,5 +655,35 @@ namespace LocalNotifications.Platform.Droid
                 EnableVibration = false,
             });
         }
+
+        public Task<bool> IsNotificationsEnabled()
+        {
+            return _notificationManager is null
+                ? Task.FromResult(false)
+                : !((int)Build.VERSION.SdkInt >= 24)
+                ? Task.FromResult(true)
+                : Task.FromResult(_notificationManager.AreNotificationsEnabled());
+        }
+
+
+        public async Task<bool> RequestNotificationPermission(NotificationPermission permission = null)
+        {
+            permission ??= new NotificationPermission();
+
+            if ((int)Build.VERSION.SdkInt < 33)
+            {
+                return false;
+            }
+
+            if (!permission.AskPermission)
+            {
+                return false;
+            }
+
+            var status = await Permissions.RequestAsync<NotificationPermissionAndroid>();
+            return status == PermissionStatus.Granted;
+        }
+
+
     }
 }
