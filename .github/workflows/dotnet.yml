@@ -1,25 +1,25 @@
-  name: Nuget Build 
+name: Nuget Build
 
-  on: [push]
+on: [push]
 
-  jobs:
-    nuget:
-      runs-on: windows-latest
+jobs:
+  nuget:
+    runs-on: windows-latest
 
-      steps:
+    steps:
       - uses: actions/checkout@v1
-      
+
       - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.0.5   
-        
+        uses: NuGet/setup-nuget@v1.0.5
+
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '6.0.x'
-          
+          dotnet-version: "8.0.x"
+
       - uses: actions/setup-java@v2
         with:
-          distribution: 'microsoft'
-          java-version: '11'
+          distribution: "microsoft"
+          java-version: "11"
 
       - name: Install MAUI Workloads
         run: |
@@ -29,20 +29,20 @@
 
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.1
-        
+
       - name: Add private GitHub registry to NuGet
         run: nuget sources add -name "GitHub" -source "https://nuget.pkg.github.com/xDaijobu/index.json" -userName xDaijobu -password ${{ secrets.Daijobu_Registry }}
-                
-      - name : restore LocalNotifications.sln
+
+      - name: restore LocalNotifications.sln
         run: nuget restore Source/LocalNotifications.sln
 
       - name: build LocalNotifications.csproj
         run: msbuild Source/LocalNotifications/LocalNotifications.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
-      
+
       - uses: actions/upload-artifact@v2.2.4
         with:
           name: LocalNotifications
-          path: Source/LocalNotifications/bin/Debug/ 
+          path: Source/LocalNotifications/bin/Debug/
 
       - name: Push generated package to GitHub registry
         run: nuget push **/*.nupkg -Source "GitHub" -SkipDuplicate
