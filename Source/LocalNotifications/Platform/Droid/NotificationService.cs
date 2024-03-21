@@ -10,7 +10,11 @@ using Android.OS;
 using AndroidX.Core.App;
 using Firebase.Messaging;
 using Android.Gms.Extensions;
+#if MONOANDROID
 using Xamarin.Essentials;
+#else
+using Microsoft.Maui.ApplicationModel;
+#endif
 
 namespace LocalNotifications.Platform.Droid
 {

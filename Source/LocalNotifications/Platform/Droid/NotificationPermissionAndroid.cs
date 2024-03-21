@@ -2,8 +2,11 @@
 using Android.OS;
 using System;
 using System.Collections.Generic;
+#if MONOANDROID
 using Xamarin.Essentials;
-
+#else
+using Microsoft.Maui.ApplicationModel;
+#endif
 namespace LocalNotifications.Platform.Droid
 {
     public partial class NotificationPermissionAndroid : Permissions.BasePlatformPermission
