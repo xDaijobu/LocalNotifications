@@ -7,8 +7,9 @@ using Android.App;
 [assembly: UsesPermission(Manifest.Permission.PostNotifications)]
 #endif
 
-#if ANDROID31_0_OR_GREATER
+#if __ANDROID_31__
 [assembly: UsesPermission(Manifest.Permission.ScheduleExactAlarm)]
+[assembly: UsesPermission(Manifest.Permission.UseExactAlarm)]
 #endif
 
 #if NET6_0_OR_GREATER
