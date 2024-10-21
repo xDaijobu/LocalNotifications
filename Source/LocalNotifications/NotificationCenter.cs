@@ -13,7 +13,9 @@ namespace LocalNotifications
         {
             get
             {
-#if NETSTANDARD2_0 || NET8_0_OR_GREATER
+#if ANDROID || IOS 
+                return new NotificationService();
+#elif NETSTANDARD2_0 || NET8_0_OR_GREATER
                 return null;
 #else
                 return new NotificationService();
