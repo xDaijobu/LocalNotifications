@@ -42,7 +42,7 @@ public class NotificationViewModel : BaseViewModel
         GetNotifications();
 
 
-        NotificationCenter.Current.OnNotificationReceived += (e) =>
+        LocalNotificationCenter.Current.OnNotificationReceived += (e) =>
         {
             Debug.WriteLine("NotificationReceived: NotificationId " + e.NotificationId);
 
@@ -53,7 +53,7 @@ public class NotificationViewModel : BaseViewModel
 
     public Command ShowNotificationCommand => new Command(() =>
     {
-        NotificationCenter.Current.Show(notificationId: NotificationId,
+        LocalNotificationCenter.Current.Show(notificationId: NotificationId,
                                         title: "ShowNow",
                                         description: "Hello World",
                                         payload: "",
@@ -63,7 +63,7 @@ public class NotificationViewModel : BaseViewModel
     public Command ScheduleNotificationCommand => new Command(async () =>
     {
         int value = 30;
-        NotificationCenter.Current.Schedule(notificationId: NotificationId,
+        LocalNotificationCenter.Current.Schedule(notificationId: NotificationId,
                                             title: $"Schedule: {DateTime.Now.AddSeconds(value)}",
                                             description: "Hello World",
                                             dateTime: DateTime.Now.AddSeconds(value),
@@ -82,7 +82,7 @@ public class NotificationViewModel : BaseViewModel
             return;
         }
 
-        NotificationCenter.Current.Cancel(SelectedNotification.NotificationId);
+        LocalNotificationCenter.Current.Cancel(SelectedNotification.NotificationId);
         SelectedNotification = null;
         GetNotifications();
 
@@ -91,7 +91,7 @@ public class NotificationViewModel : BaseViewModel
 
     public Command CancelAllNotificationsCommand => new Command(async () =>
     {
-        NotificationCenter.Current.CancelAll();
+        LocalNotificationCenter.Current.CancelAll();
 
         SelectedNotification = null;
         GetNotifications();
@@ -110,7 +110,7 @@ public class NotificationViewModel : BaseViewModel
 
     public void GetNotifications()
     {
-        PendingNotifications = new ObservableCollection<NotificationRequest>(NotificationCenter.Current.GetPendingNotificationRequests());
+        PendingNotifications = new ObservableCollection<NotificationRequest>(LocalNotificationCenter.Current.GetPendingNotificationRequests());
     }
 }
 

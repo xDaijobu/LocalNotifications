@@ -1,5 +1,7 @@
 ﻿using LocalNotifications;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Controls.Hosting;
+using Microsoft.Maui.Hosting;
 using Microsoft.Maui.LifecycleEvents;
 
 namespace LocalNotificationsSample2;

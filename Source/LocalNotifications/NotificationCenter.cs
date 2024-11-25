@@ -1,34 +1,26 @@
 ﻿using System;
-#if MONOANDROID || ANDROID
-using LocalNotifications.Platform.Droid;
-#elif XAMARINIOS || IOS
-using LocalNotifications.Platform.iOS;
+using System.Threading;
+
+#if ANDROID || IOS
+using LocalNotifications.Platforms;
 #endif
 
 namespace LocalNotifications
 {
-    public static class NotificationCenter
+    public partial class LocalNotificationCenter
     {
-        private static INotificationService _current
-        {
-            get
-            {
-#if ANDROID || IOS 
-                return new NotificationService();
-#elif NETSTANDARD2_0 || NET8_0_OR_GREATER
-                return null;
+        public static readonly Lazy<INotificationService?> implementation = new(CreateNotificationService, LazyThreadSafetyMode.PublicationOnly);
+
+        private static INotificationService? CreateNotificationService() =>
+#if ANDROID || IOS || WINDOWS
+            new NotificationServiceImpl();
 #else
-                return new NotificationService();
+    null;
 #endif
-            }
-        }
 
         /// <summary>
         /// Platform specific INotificationService.
         /// </summary>
-        public static INotificationService Current
-        {
-            get => _current ?? throw new InvalidOperationException("Plugin not found");
-        }
+        public static INotificationService Current => implementation.Value;
     }
 }

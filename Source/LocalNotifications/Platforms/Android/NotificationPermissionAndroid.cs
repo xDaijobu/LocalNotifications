@@ -7,7 +7,7 @@ using Xamarin.Essentials;
 #else
 using Microsoft.Maui.ApplicationModel;
 #endif
-namespace LocalNotifications.Platform.Droid
+namespace LocalNotifications.Platforms
 {
     public partial class NotificationPermissionAndroid : Permissions.BasePlatformPermission
     {

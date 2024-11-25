@@ -19,7 +19,7 @@
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
@@ -56,11 +56,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0-rc.1.22426.10" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\Source\LocalNotifications\LocalNotifications.csproj" />
+<!--		<PackageReference Include="LocalNotifications" Version="2.0.5.4" />-->
 	</ItemGroup>
 
 	<ItemGroup>

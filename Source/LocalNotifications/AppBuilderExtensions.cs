@@ -1,5 +1,4 @@
-﻿#if NET8_0_OR_GREATER
-using Microsoft.Maui.Hosting;
+﻿using Microsoft.Maui.Hosting;
 using Microsoft.Maui.LifecycleEvents;
 
 namespace LocalNotifications;
@@ -15,6 +14,9 @@ public static class AppBuilderExtensions
     /// <returns></returns>
     public static MauiAppBuilder UseLocalNotifications(this MauiAppBuilder builder, bool isFirebase, bool autoRegistration)
     {
+	    
+	    builder.Services.AddSingleton(LocalNotificationCenter.Current);
+	    
         builder// https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/app-lifecycle
               .ConfigureLifecycleEvents(events =>
               {
@@ -25,14 +27,14 @@ public static class AppBuilderExtensions
 
                 static void OnNotificationTapped(Android.Content.Intent intent)
 	            {
-                    Platform.Droid.NotificationService.NotificationTapped(intent);
+		            Platforms.NotificationServiceImpl.NotificationTapped(intent);
                 }
         #elif IOS
 	            events.AddiOS(iOS => iOS.FinishedLaunching((app, options) => InitLocalNotifications(options, isFirebase, autoRegistration)));
 
 	            static bool InitLocalNotifications(Foundation.NSDictionary options, bool isFirebase, bool autoRegistration)
 	            {
-                    Platform.iOS.NotificationService.Initialize(options: options,
+                    Platforms.NotificationServiceImpl.Initialize(options: options,
                                                                 isFirebase: isFirebase,
                                                                 autoRegistration: autoRegistration);
 		            return true;
@@ -43,4 +45,3 @@ public static class AppBuilderExtensions
         return builder;
     }
 }
-#endif
