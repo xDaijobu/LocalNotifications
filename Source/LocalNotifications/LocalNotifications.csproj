@@ -40,7 +40,7 @@
     
     <NoWarn>1701;1702;1591</NoWarn>
     <LangVersion>11.0</LangVersion>
-    <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-ios'))">11.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-ios'))">12.2</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-android'))">21.0</SupportedOSPlatformVersion>
 
 	<SingleProject>true</SingleProject>
