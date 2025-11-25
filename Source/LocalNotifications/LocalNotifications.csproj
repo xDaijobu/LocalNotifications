@@ -23,7 +23,7 @@
     <Description>A cross platform plugin for displaying local notifications.</Description>
     <PackageReleaseNotes>Check: https://github.com/xDaijobu/LocalNotifications/releases </PackageReleaseNotes>	  
     <Copyright>Copyright © Cristover Wurangian</Copyright>
-    <Version>3.0.0.1</Version>
+    <Version>3.0.0.2</Version>
 <!--    <EnableDefaultItems>false</EnableDefaultItems>-->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -67,7 +67,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
-    <PackageReference Include="AdamE.Firebase.iOS.CloudMessaging" Version="11.10.0" />
+    <PackageReference Include="AdamE.Firebase.iOS.CloudMessaging" Version="12.4.0" />
   </ItemGroup>
 
   <ItemGroup>
