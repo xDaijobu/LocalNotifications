@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{6BEC6D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocalNotifications", "Source\LocalNotifications\LocalNotifications.csproj", "{ABA387EC-7C40-455D-84E0-D2C61E3E7F07}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Maui", "Maui", "{01EA35EE-FC85-4FCA-9CCC-E98A3092A80D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,7 +46,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{ABA387EC-7C40-455D-84E0-D2C61E3E7F07} = {32765120-44F5-4A58-8647-114DCCF52902}
-		{01EA35EE-FC85-4FCA-9CCC-E98A3092A80D} = {6BEC6D7D-7C51-4D69-8FA5-0926C7630147}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CC21107F-3669-4EA8-AB88-55FB92EAD509}
