@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LocalNotificationSample.MainPage"
+             Title="LocalNotifications Sample">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="20">
+            
+            <!-- Header -->
+            <Label 
+                Text="LocalNotifications API Examples"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                Margin="0,0,0,20"/>
+
+            <!-- Show Notification Section -->
+            <Frame BorderColor="{StaticResource Primary}" Padding="15" Margin="0,5">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Show Notifications" FontSize="18" FontAttributes="Bold"/>
+                    
+                    <Button 
+                        Text="Show Now"
+                        Clicked="OnShowNowClicked"
+                        BackgroundColor="{StaticResource Primary}"/>
+                    
+                    <Button 
+                        Text="Schedule (30 seconds)"
+                        Clicked="OnScheduleClicked"
+                        BackgroundColor="{StaticResource Primary}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Repeating Notifications Section -->
+            <Frame BorderColor="{StaticResource Secondary}" Padding="15" Margin="0,5">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Repeating Notifications" FontSize="18" FontAttributes="Bold"/>
+                    
+                    <Button 
+                        Text="Hourly"
+                        Clicked="OnShowHourlyClicked"
+                        BackgroundColor="{StaticResource Secondary}"/>
+                    
+                    <Button 
+                        Text="Daily"
+                        Clicked="OnShowDailyClicked"
+                        BackgroundColor="{StaticResource Secondary}"/>
+                    
+                    <Button 
+                        Text="Weekly"
+                        Clicked="OnShowWeeklyClicked"
+                        BackgroundColor="{StaticResource Secondary}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Manage Notifications Section -->
+            <Frame BorderColor="{StaticResource Tertiary}" Padding="15" Margin="0,5">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Manage Notifications" FontSize="18" FontAttributes="Bold"/>
+                    
+                    <Button 
+                        Text="Get Pending Notifications"
+                        Clicked="OnGetPendingClicked"
+                        BackgroundColor="{StaticResource Tertiary}"/>
+                    
+                    <Button 
+                        Text="Cancel Specific"
+                        Clicked="OnCancelSpecificClicked"
+                        BackgroundColor="{StaticResource Tertiary}"/>
+                    
+                    <Button 
+                        Text="Cancel All"
+                        Clicked="OnCancelAllClicked"
+                        BackgroundColor="Red"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Permission and Settings Section -->
+            <Frame BorderColor="Green" Padding="15" Margin="0,5">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Permissions and Settings" FontSize="18" FontAttributes="Bold"/>
+                    
+                    <Button 
+                        Text="Request Permission"
+                        Clicked="OnRequestPermissionClicked"
+                        BackgroundColor="Green"/>
+                    
+                    <Button 
+                        Text="Check if Enabled"
+                        Clicked="OnCheckEnabledClicked"
+                        BackgroundColor="Green"/>
+                    
+                    <Button 
+                        Text="Get Firebase Token"
+                        Clicked="OnGetTokenClicked"
+                        BackgroundColor="Green"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Event Log Section -->
+            <Frame BorderColor="Gray" Padding="15" Margin="0,5">
+                <VerticalStackLayout Spacing="10">
+                    <HorizontalStackLayout HorizontalOptions="FillAndExpand">
+                        <Label 
+                            Text="Event Log" 
+                            FontSize="18" 
+                            FontAttributes="Bold"
+                            HorizontalOptions="StartAndExpand"/>
+                        <Button 
+                            Text="Clear"
+                            Clicked="OnClearLogClicked"
+                            BackgroundColor="Gray"
+                            WidthRequest="80"/>
+                    </HorizontalStackLayout>
+                    
+                    <ScrollView HeightRequest="200">
+                        <Label 
+                            x:Name="LogLabel"
+                            Text="Events will appear here..."
+                            FontSize="12"
+                            LineBreakMode="WordWrap"/>
+                    </ScrollView>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Info Section -->
+            <Label 
+                Text="Tip: Notifications may not show when app is in foreground on some platforms."
+                FontSize="12"
+                FontAttributes="Italic"
+                HorizontalOptions="Center"
+                TextColor="Gray"
+                Margin="0,10,0,0"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

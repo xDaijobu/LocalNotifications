@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net8.0-android;net8.0-ios</TargetFrameworks>
+    <TargetFrameworks>net9.0;net9.0-android;net9.0-ios</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseMaui>true</UseMaui>
+    <MauiVersion Condition="$(TargetFramework.Contains('net8.0'))">8.0.3</MauiVersion>                
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <DefaultLanguage>en-US</DefaultLanguage>
     <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
@@ -21,7 +23,7 @@
     <Description>A cross platform plugin for displaying local notifications.</Description>
     <PackageReleaseNotes>Check: https://github.com/xDaijobu/LocalNotifications/releases </PackageReleaseNotes>	  
     <Copyright>Copyright © Cristover Wurangian</Copyright>
-    <Version>3.0.0.0</Version>
+    <Version>3.0.0.1</Version>
 <!--    <EnableDefaultItems>false</EnableDefaultItems>-->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -38,7 +40,7 @@
     
     <NoWarn>1701;1702;1591</NoWarn>
     <LangVersion>11.0</LangVersion>
-    <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-ios'))">11.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-ios'))">12.2</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-android'))">21.0</SupportedOSPlatformVersion>
 
 	<SingleProject>true</SingleProject>
@@ -56,31 +58,19 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-	<!--<ItemGroup>
-		<Compile Remove="**/Platforms/Generic/**/*.cs" />
-		<None Include="**/Platforms/Generic/**/*.cs" />
-	</ItemGroup>
-
-	--><!-- .NET (generic) --><!--
-	<ItemGroup Condition="($(TargetFramework.StartsWith('net')) AND $(TargetFramework.EndsWith('.0')) AND $(TargetFramework.Contains('-')) != true)">
-		<Compile Include="**/Platforms/Generic/**/*.cs" />
-	</ItemGroup>-->
-
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
-	<PackageReference Include="Xamarin.Firebase.Common" Version="120.1.2" />
-	<PackageReference Include="Xamarin.Firebase.Messaging" Version="123.0.8" />
-	<PackageReference Include="Xamarin.GooglePlayServices.Base" Version="118.1.0" />
-	<PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="118.1.0" />
-	<PackageReference Include="Xamarin.GooglePlayServices.Tasks" Version="118.0.2" />
+    <PackageReference Include="Xamarin.Firebase.Common" Version="120.1.2" />
+    <PackageReference Include="Xamarin.Firebase.Messaging" Version="123.0.8" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="118.1.0" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Basement" Version="118.1.0" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Tasks" Version="118.0.2" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
-	<PackageReference Include="Xamarin.Firebase.iOS.CloudMessaging" Version="8.10.0.2" />
+    <PackageReference Include="AdamE.Firebase.iOS.CloudMessaging" Version="11.10.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-	<PackageReference Include="Xamarin.Build.Download" Version="0.11.3" PrivateAssets="All" />
-
+    <PackageReference Include="Newtonsoft.Json" Version="[13.0.3,)" />
   </ItemGroup>
 </Project> 

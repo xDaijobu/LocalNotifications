@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="e_intidata.localnotificationssample">
-	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="33" />
-	<application android:label="LocalNotificationsSample.Android" android:theme="@style/MainTheme"></application>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<!--https://stackoverflow.com/questions/71031091/android-12-using-schedule-exact-alarm-permission-to-get-show-data-at-specific-t-->
-	<uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-</manifest>

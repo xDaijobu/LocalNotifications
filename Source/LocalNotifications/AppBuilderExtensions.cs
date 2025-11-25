@@ -23,7 +23,10 @@ public static class AppBuilderExtensions
         #if ANDROID
 	        events.AddAndroid(android => android
 		        .OnCreate((activity, bundle) => OnNotificationTapped(activity.Intent))
-		        .OnNewIntent((activity, intent) => OnNotificationTapped(intent)));
+		        .OnNewIntent((activity, intent) =>
+		        {
+			        OnNotificationTapped(intent);
+		        }));
 
                 static void OnNotificationTapped(Android.Content.Intent intent)
 	            {
