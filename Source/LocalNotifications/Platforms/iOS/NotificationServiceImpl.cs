@@ -136,7 +136,10 @@ namespace LocalNotifications.Platforms
         }
 
         public Task<string> GetTokenAsync()
-            => Task.FromResult(Messaging.SharedInstance.FcmToken);
+        {
+            var token = Messaging.SharedInstance.FcmToken;
+            return Task.FromResult(token);
+        }
 
         public static Task RequestPermissions()
             => RequestPermissionsAsync();

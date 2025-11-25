@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
+		<TargetFrameworks>net8.0-android</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>LocalNotificationsSample2</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -25,11 +25,11 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<AndroidResource Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
-		<AndroidResource Include="Resources\Images\dotnet_bot.svg" />
+		<AndroidAsset Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<AndroidAsset Include="Resources\Images\dotnet_bot.svg" />
 
 		<!-- Splash Screen -->
-		<AndroidResource Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<AndroidAsset Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -39,19 +39,24 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
+
 	<ItemGroup>
-	  <MauiFont Remove="Resources\Fonts\OpenSansRegular.ttf" />
-	  <MauiFont Remove="Resources\Fonts\OpenSansSemibold.ttf" />
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+
+		<EmbeddedResource Include="Resources\Embedded\*" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\dotnet_bot.svg" />
-	</ItemGroup>
-
 
 	<ItemGroup>
-	  <AndroidResource Include="Resources\Fonts\OpenSansRegular.ttf" />
-	  <AndroidResource Include="Resources\Fonts\OpenSansSemibold.ttf" />
+		<AndroidAsset Include="Resources\Fonts\OpenSansRegular.ttf" />
+		<AndroidAsset Include="Resources\Fonts\OpenSansSemibold.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>

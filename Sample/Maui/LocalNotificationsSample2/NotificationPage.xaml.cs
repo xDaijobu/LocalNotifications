@@ -49,6 +49,12 @@ public class NotificationViewModel : BaseViewModel
             // re-get notifications
             GetNotifications();
         };
+        
+        LocalNotificationCenter.Current.OnNotificationTapped += (e) =>
+        {
+            Debug.WriteLine("NotificationTapped: NotificationId " + e.NotificationId);
+
+        };
     }
 
     public Command ShowNotificationCommand => new Command(() =>
