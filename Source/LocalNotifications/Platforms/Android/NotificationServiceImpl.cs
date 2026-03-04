@@ -280,7 +280,7 @@ namespace LocalNotifications.Platforms
             long delayMillis = notificationRequest.NotifyTimeSinceEpoch - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             if (delayMillis < 0) delayMillis = 0;
 
-            var workRequest = new OneTimeWorkRequest.Builder(Java.Lang.Class.FromType(typeof(ScheduledNotificationWorker)))
+            var workRequest = (OneTimeWorkRequest)new OneTimeWorkRequest.Builder(Java.Lang.Class.FromType(typeof(ScheduledNotificationWorker)))
                 .SetInitialDelay(delayMillis, Java.Util.Concurrent.TimeUnit.Milliseconds)
                 .SetInputData(data)
                 .Build();
@@ -346,7 +346,7 @@ namespace LocalNotifications.Platforms
                 long initialDelay = startTimeMilliSeconds - currentTime;
                 if (initialDelay < 0) initialDelay = 0;
 
-                var workRequest = new PeriodicWorkRequest.Builder(
+                var workRequest = (PeriodicWorkRequest)new PeriodicWorkRequest.Builder(
                         Java.Lang.Class.FromType(typeof(ScheduledNotificationWorker)),
                         repeatInterval, Java.Util.Concurrent.TimeUnit.Milliseconds)
                     .SetInitialDelay(initialDelay, Java.Util.Concurrent.TimeUnit.Milliseconds)
