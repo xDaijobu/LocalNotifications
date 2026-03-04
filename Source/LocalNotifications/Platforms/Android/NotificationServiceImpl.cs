@@ -467,7 +467,7 @@ namespace LocalNotifications.Platforms
 
         public Notification CreateNotification(Context context, NotificationRequest notificationRequest)
         {
-            //CreateNotificationChannel();
+            notificationRequest.Android ??= new AndroidOptions();
 
             var notificationIntent = Application.Context.PackageManager?.GetLaunchIntentForPackage(Application.Context.PackageName ?? string.Empty);
             if (notificationIntent is null)
