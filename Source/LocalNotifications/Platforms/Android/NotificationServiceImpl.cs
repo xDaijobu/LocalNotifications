@@ -281,14 +281,14 @@ namespace LocalNotifications.Platforms
             if (delayMillis < 0) delayMillis = 0;
 
             var workRequest = new OneTimeWorkRequest.Builder(Java.Lang.Class.FromType(typeof(ScheduledNotificationWorker)))
-                .SetInitialDelay(delayMillis, Java.Util.Concurrent.TimeUnit.Milliseconds!)
+                .SetInitialDelay(delayMillis, Java.Util.Concurrent.TimeUnit.Milliseconds)
                 .SetInputData(data)
                 .Build();
 
             WorkManager.GetInstance(Application.Context)
                 .EnqueueUniqueWork(
                     GetWorkName(notificationRequest.NotificationId),
-                    ExistingWorkPolicy.Replace!,
+                    ExistingWorkPolicy.Replace,
                     workRequest);
 
             if (updateScheduledNotificationsCache)
@@ -348,15 +348,15 @@ namespace LocalNotifications.Platforms
 
                 var workRequest = new PeriodicWorkRequest.Builder(
                         Java.Lang.Class.FromType(typeof(ScheduledNotificationWorker)),
-                        repeatInterval, Java.Util.Concurrent.TimeUnit.Milliseconds!)
-                    .SetInitialDelay(initialDelay, Java.Util.Concurrent.TimeUnit.Milliseconds!)
+                        repeatInterval, Java.Util.Concurrent.TimeUnit.Milliseconds)
+                    .SetInitialDelay(initialDelay, Java.Util.Concurrent.TimeUnit.Milliseconds)
                     .SetInputData(data)
                     .Build();
 
                 WorkManager.GetInstance(Application.Context)
                     .EnqueueUniquePeriodicWork(
                         GetWorkName(notificationRequest.NotificationId),
-                        ExistingPeriodicWorkPolicy.Replace!,
+                        ExistingPeriodicWorkPolicy.Replace,
                         workRequest);
 
                 if (updateScheduledNotificationsCache)
