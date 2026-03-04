@@ -59,8 +59,7 @@ public partial class MainPage : ContentPage
                 payload: "show_now_payload",
                 androidOptions: new AndroidOptions
                 {
-                    IconName = "notification_icon",
-                    ChannelId = "default_channel"
+                    IconName = "notification_icon"
                 },
                 iOSOptions: new iOSOptions
                 {
@@ -89,8 +88,7 @@ public partial class MainPage : ContentPage
                 payload: "scheduled_payload",
                 androidOptions: new AndroidOptions
                 {
-                    IconName = "notification_icon",
-                    ChannelId = "default_channel"
+                    IconName = "notification_icon"
                 },
                 iOSOptions: new iOSOptions
                 {
@@ -119,8 +117,7 @@ public partial class MainPage : ContentPage
                 payload: "hourly_payload",
                 androidOptions: new AndroidOptions
                 {
-                    IconName = "notification_icon",
-                    ChannelId = "default_channel"
+                    IconName = "notification_icon"
                 },
                 iOSOptions: new iOSOptions
                 {
@@ -149,8 +146,7 @@ public partial class MainPage : ContentPage
                 payload: "daily_payload",
                 androidOptions: new AndroidOptions
                 {
-                    IconName = "notification_icon",
-                    ChannelId = "default_channel"
+                    IconName = "notification_icon"
                 },
                 iOSOptions: new iOSOptions
                 {
@@ -193,8 +189,7 @@ public partial class MainPage : ContentPage
                 payload: "weekly_payload",
                 androidOptions: new AndroidOptions
                 {
-                    IconName = "notification_icon",
-                    ChannelId = "default_channel"
+                    IconName = "notification_icon"
                 },
                 iOSOptions: new iOSOptions
                 {
