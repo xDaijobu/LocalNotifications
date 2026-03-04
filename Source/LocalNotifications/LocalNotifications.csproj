@@ -59,6 +59,7 @@
   </PropertyGroup>
 
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <PackageReference Include="Xamarin.AndroidX.Work.Runtime" Version="2.10.0.1" />
     <PackageReference Include="Xamarin.Firebase.Common" Version="120.1.2" />
     <PackageReference Include="Xamarin.Firebase.Messaging" Version="123.0.8" />
     <PackageReference Include="Xamarin.GooglePlayServices.Base" Version="118.1.0" />

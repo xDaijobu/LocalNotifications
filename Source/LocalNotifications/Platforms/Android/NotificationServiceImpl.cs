@@ -8,6 +8,7 @@ using Android.Icu.Util;
 using Android.Media;
 using Android.OS;
 using AndroidX.Core.App;
+using AndroidX.Work;
 using Firebase.Messaging;
 using Android.Gms.Extensions;
 using Microsoft.Maui.ApplicationModel;
@@ -30,7 +31,6 @@ namespace LocalNotifications.Platforms
                 : PendingIntentFlags.UpdateCurrent;
 
         private NotificationManager _notificationManager;
-        private AlarmManager _alarmManager => Application.Context.GetSystemService(Context.AlarmService) as AlarmManager;
 
         private Context CurrentContext;
 
@@ -228,13 +228,11 @@ namespace LocalNotifications.Platforms
             if (!OperatingSystem.IsAndroidVersionAtLeast(21))
                 return;
 #endif
-            Intent intent = new Intent(CurrentContext, typeof(ScheduledNotificationReceiver));
-            PendingIntent pendingIntent = PendingIntent.GetBroadcast(CurrentContext, notificationId, intent, pendingIntentFlags);
-            _alarmManager.Cancel(pendingIntent);
+            WorkManager.GetInstance(Application.Context)
+                .CancelUniqueWork(GetWorkName(notificationId));
 
             var notificationManager = NotificationManager.FromContext(Application.Context);
             notificationManager.Cancel(notificationId);
-            //_notificationManager.Cancel(notificationId);
             RemoveNotificationFromCache(CurrentContext, notificationId);
         }
 
@@ -247,11 +245,10 @@ namespace LocalNotifications.Platforms
             if (scheduledNotifications == null || scheduledNotifications.Count == 0)
                 return;
 
-            Intent intent = new Intent(CurrentContext, typeof(ScheduledNotificationReceiver));
             foreach (NotificationRequest notification in scheduledNotifications)
             {
-                PendingIntent pendingIntent = PendingIntent.GetBroadcast(CurrentContext, notification.NotificationId, intent, pendingIntentFlags);
-                _alarmManager.Cancel(pendingIntent);
+                WorkManager.GetInstance(Application.Context)
+                    .CancelUniqueWork(GetWorkName(notification.NotificationId));
             }
 
             SaveScheduledNotifications(CurrentContext, new List<NotificationRequest>());
@@ -274,14 +271,25 @@ namespace LocalNotifications.Platforms
         private void ScheduleNotification(Context context, NotificationRequest notificationRequest, bool updateScheduledNotificationsCache)
         {
             string notificationRequestJson = notificationRequest.ToJson();
-            Intent notificationIntent = new Intent(Application.Context, typeof(ScheduledNotificationReceiver));
-            notificationIntent.PutExtra(NotificationConstans.NOTIFICATION_REQUEST, notificationRequestJson);
-            PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, notificationRequest.NotificationId, notificationIntent, pendingIntentFlags);
 
-            if (notificationRequest.Android.AllowWhileIdle)
-                _alarmManager.SetExactAndAllowWhileIdle(AlarmType.RtcWakeup, notificationRequest.NotifyTimeSinceEpoch, pendingIntent);
-            else
-                _alarmManager.SetExact(AlarmType.RtcWakeup, notificationRequest.NotifyTimeSinceEpoch, pendingIntent);
+            var data = new Data.Builder()
+                .PutString(NotificationConstans.NOTIFICATION_REQUEST, notificationRequestJson)
+                .PutBoolean(NotificationConstans.REPEAT, false)
+                .Build();
+
+            long delayMillis = notificationRequest.NotifyTimeSinceEpoch - DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            if (delayMillis < 0) delayMillis = 0;
+
+            var workRequest = new OneTimeWorkRequest.Builder(Java.Lang.Class.FromType(typeof(ScheduledNotificationWorker)))
+                .SetInitialDelay(delayMillis, Java.Util.Concurrent.TimeUnit.Milliseconds!)
+                .SetInputData(data)
+                .Build();
+
+            WorkManager.GetInstance(Application.Context)
+                .EnqueueUniqueWork(
+                    GetWorkName(notificationRequest.NotificationId),
+                    ExistingWorkPolicy.Replace!,
+                    workRequest);
 
             if (updateScheduledNotificationsCache)
                 SaveScheduledNotification(context, notificationRequest);
@@ -292,10 +300,11 @@ namespace LocalNotifications.Platforms
             try
             {
                 string notificationRequestJson = notificationRequest.ToJson();
-                Intent notificationIntent = new Intent(Application.Context, typeof(ScheduledNotificationReceiver));
-                notificationIntent.PutExtra(NotificationConstans.NOTIFICATION_REQUEST, notificationRequestJson);
-                notificationIntent.PutExtra(NotificationConstans.REPEAT, true);
-                PendingIntent pendingIntent = PendingIntent.GetBroadcast(Application.Context, notificationRequest.NotificationId, notificationIntent, pendingIntentFlags);
+
+                var data = new Data.Builder()
+                    .PutString(NotificationConstans.NOTIFICATION_REQUEST, notificationRequestJson)
+                    .PutBoolean(NotificationConstans.REPEAT, true)
+                    .Build();
 
                 long repeatInterval = 0;
 
@@ -308,7 +317,7 @@ namespace LocalNotifications.Platforms
                         repeatInterval = 60000 * 60 * 24;
                         break;
                     case NotificationRepeat.Weekly:
-                        repeatInterval = 60000 * 60 * 24 * 7;
+                        repeatInterval = (long)60000 * 60 * 24 * 7;
                         break;
                     default:
                         break;
@@ -334,7 +343,21 @@ namespace LocalNotifications.Platforms
                 while (startTimeMilliSeconds < currentTime)
                     startTimeMilliSeconds += repeatInterval;
 
-                _alarmManager.SetInexactRepeating(AlarmType.RtcWakeup, startTimeMilliSeconds, repeatInterval, pendingIntent);
+                long initialDelay = startTimeMilliSeconds - currentTime;
+                if (initialDelay < 0) initialDelay = 0;
+
+                var workRequest = new PeriodicWorkRequest.Builder(
+                        Java.Lang.Class.FromType(typeof(ScheduledNotificationWorker)),
+                        repeatInterval, Java.Util.Concurrent.TimeUnit.Milliseconds!)
+                    .SetInitialDelay(initialDelay, Java.Util.Concurrent.TimeUnit.Milliseconds!)
+                    .SetInputData(data)
+                    .Build();
+
+                WorkManager.GetInstance(Application.Context)
+                    .EnqueueUniquePeriodicWork(
+                        GetWorkName(notificationRequest.NotificationId),
+                        ExistingPeriodicWorkPolicy.Replace!,
+                        workRequest);
 
                 if (updateScheduledNotificationsCache)
                 {
@@ -361,6 +384,8 @@ namespace LocalNotifications.Platforms
                     RepeatNotification(context, notification, false);
             }
         }
+
+        private static string GetWorkName(int notificationId) => $"ln_{notificationId}";
 
         // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/lock-statement
         private readonly object locker = new object();
